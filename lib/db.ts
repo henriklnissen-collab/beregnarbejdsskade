@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 /**
  * Forbindelse til databasen.
@@ -8,7 +8,8 @@ import { createClient } from '@supabase/supabase-js';
  * havne i browseren. Derfor ingen NEXT_PUBLIC_ foran den.
  */
 
-let klient: ReturnType<typeof createClient> | null = null;
+// Uden genererede tabeltyper: any, så insert/update ikke afvises ved build.
+let klient: SupabaseClient<any, 'public', any> | null = null;
 
 /**
  * Renser en værdi fra .env.local for de tastefejl, der er nemme at lave:
