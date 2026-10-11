@@ -115,7 +115,9 @@ export async function POST(req: Request) {
         aarsvaerk_cvr: k.aarsvaerkCvr ?? null,
         aarsvaerk_periode: k.aarsvaerkPeriode ?? null,
         startdato: k.startdato || null,
-        estimat_total: estimat.total,
+        // Vores egen middelpræmie. Den er det, selskaberne skal matche,
+        // og derfor ikke den samlede udgift inklusive AES.
+        estimat_total: estimat.middel,
         kontakt_navn: navn,
         kontakt_mail: mail,
         kontakt_tlf: k.kontaktTlf || null,
@@ -172,7 +174,12 @@ export async function POST(req: Request) {
       sagId: sag.id,
       antalModtagere: ider.length,
       mailsSendt: sendte,
-      estimat: { lav: estimat.lav, hoej: estimat.hoej, total: estimat.total },
+      estimat: {
+        lav: estimat.lav,
+        middel: estimat.middel,
+        hoej: estimat.hoej,
+        aes: estimat.aes,
+      },
     });
   } catch (e: any) {
     console.error('Kunne ikke oprette forespørgsel:', e?.message ?? e);

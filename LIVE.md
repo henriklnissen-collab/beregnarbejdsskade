@@ -112,13 +112,34 @@ Det sparer jer for opslag af CVR-kvoten, når flere slår det samme firma op.
 
 Disse hører til hos den, der ejer selskabet bag siden. Ikke teknik.
 
-- [ ] Satserne i `lib/priser.ts` er rigtige tal fra et selskab, ikke gæt
+- [ ] Satserne i `lib/priser.ts` er gennemgået. Grundlaget er regnegrundlag
+      2026.1: K1-lav og K6-høj er dokumenterede brancheaftaler, resten er
+      kalibrerede skøn. Justér middelsatserne for K2–K5 med din egen
+      markedsviden, før de første kunder ser dem.
 - [ ] Mindst tre selskaber har sagt ja og er sat `aktiv = true` i Supabase
 - [ ] Mailadresserne i tabellen `modtagere` er de rigtige
 - [ ] Juridisk vurdering: er modellen lead-formidling eller forsikringsformidling?
 - [ ] Privatlivspolitik og cookiebanner
 - [ ] Databehandleraftaler med de selskaber, I sender oplysninger til
 - [ ] Teksten om samtykke til skadesoplysninger er gennemgået af en jurist
+
+---
+
+## G2. Omkring november 2026: slå 2027-faktoren til
+
+Efter Højesterets dom af 28. april 2026 forventes præmierne at stige ved
+fornyelse 1. januar 2027. Ingen selskaber har offentliggjort en sats endnu.
+
+Når Tryg, Alm. Brand eller Sampo melder tal ud:
+
+1. Åbn `lib/priser.ts`.
+2. Find `FAKTOR_2027`.
+3. Sæt `aktiv: true` og ret `standard` til den sats, markedet melder
+   (intervallet 5–25 % er det, analytikerne regner med).
+4. Send faktoren med ind i `beregn(...)` som `tillaeg2027`.
+
+Indtil da er +10 % et neutralt midtpunkt — ikke en dokumenteret sats.
+Derfor står den slået fra.
 
 ---
 

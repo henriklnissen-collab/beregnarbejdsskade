@@ -153,7 +153,8 @@ ${antalModtagere === 1 ? 'forsikringsselskab' : 'forsikringsselskaber'}.
 <div style="background:#E4EFEA;border-radius:12px;padding:20px;margin-bottom:24px">
 <p style="margin:0 0 6px;font-size:15px">Vores vejledende estimat for ${sag.firmanavn}</p>
 <p style="margin:0;font-size:26px;font-weight:800;color:#0E2B33">${kr(estimatLav)}–${kr(estimatHoej)}</p>
-<p style="margin:6px 0 0;font-size:14px;color:#657C84">om året, inklusive AES-bidrag</p>
+<p style="margin:6px 0 0;font-size:14px;color:#657C84">om året i præmie. AES-bidraget for
+erhvervssygdomme betales særskilt via Samlet Betaling.</p>
 </div>
 
 <p style="margin:0 0 20px">

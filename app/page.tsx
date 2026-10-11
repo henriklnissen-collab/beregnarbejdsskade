@@ -179,11 +179,15 @@ function Beregner({
           {estimat ? (
             <>
               <p className="pbig">
-                {tal(estimat.lav)}–{tal(estimat.hoej)}<span className="kr">kr./år</span>
+                {tal(estimat.middel)}<span className="kr">kr./år</span>
               </p>
               <p className="pmeta">
-                Inklusive AES-bidrag · svarer til {kroner(estimat.maanedligt)} om måneden
+                Typisk niveau · markedet spænder fra {tal(estimat.lav)} til{' '}
+                {tal(estimat.hoej)} kr. · {kroner(estimat.maanedligt)} om måneden
               </p>
+              <span className="pprog">
+                Hertil AES-bidrag {tal(estimat.aes)} kr. om året, som betales særskilt
+              </span>
               <div className="phandling">
                 <button className="btn stor" onClick={onVidere}>
                   Få tilbud fra selskaberne
@@ -241,10 +245,46 @@ function Beregner({
             </p>
 
             {estimat && (
-              <p className="note" style={{ marginTop: 20 }}>
-                Estimatet er vejledende. Den endelige præmie fastsættes af
-                forsikringsselskabet og reguleres efter årets faktiske antal årsværk.
-              </p>
+              <>
+                <div className="breakdown" style={{ marginTop: 24 }}>
+                  <div className="ln">
+                    <b>Risikoklasse</b>
+                    <span>{estimat.klasse} · {estimat.klassenavn}</span>
+                  </div>
+                  <div className="ln">
+                    <b>Årspræmie, typisk</b>
+                    <span>{kroner(estimat.middel)}</span>
+                  </div>
+                  <div className="ln">
+                    <b>Spænd i markedet</b>
+                    <span>{kroner(estimat.lav)} – {kroner(estimat.hoej)}</span>
+                  </div>
+                  <div className="ln">
+                    <b>AES-bidrag</b>
+                    <span>{kroner(estimat.aes)}</span>
+                  </div>
+                  <div className="ln tot">
+                    <b>Samlet lovpligtig udgift</b>
+                    <span>{kroner(estimat.total)}</span>
+                  </div>
+                </div>
+
+                <p className="note" style={{ marginTop: 20 }}>
+                  Præmien indeholder lovpligtigt arbejdsmiljøbidrag på 2 % og 30 kr.
+                  pr. årsværk til Garantifonden. <b>AES-bidraget for erhvervssygdomme
+                  betales særskilt</b> via Samlet Betaling og går ikke til
+                  forsikringsselskabet.
+                  {estimat.aesUsikker && ' AES-satsen afhænger af den præcise branchekode.'}
+                </p>
+
+                <p className="note">
+                  Estimatet er vejledende og ikke et tilbud. Den endelige præmie
+                  fastsættes af forsikringsselskabet efter en konkret vurdering og
+                  reguleres efter årets faktiske antal årsværk. Efter Højesterets dom
+                  af 28. april 2026 om erhvervsevnetab forventes priserne at stige ved
+                  fornyelse.
+                </p>
+              </>
             )}
           </div>
         </div>
