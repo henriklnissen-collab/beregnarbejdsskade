@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arbejdsskadeforsikring – beregn prisen på 2 minutter | beregnarbejdsskade.dk</title>
+<meta name="description" content="Beregn prisen på arbejdsskadeforsikring til din virksomhed. Indtast CVR-nummer, så henter vi branchekode og årsværk og giver dig et vejledende prisestimat med det samme. Gratis og uforpligtende.">
+<link rel="canonical" href="https://beregnarbejdsskade.dk/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="da_DK">
+<meta property="og:site_name" content="beregnarbejdsskade.dk">
+<meta property="og:title" content="Arbejdsskadeforsikring – beregn prisen på 2 minutter">
+<meta property="og:description" content="Indtast CVR-nummer og få et vejledende prisestimat på arbejdsskadeforsikring til din virksomhed. Gratis og uforpligtende.">
+<meta property="og:url" content="https://beregnarbejdsskade.dk/">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F6F6; --surface:#FFFFFF; --ink:#0E2B33; --body:#3E5760; --muted:#657C84;
+  --primary:#1F5F52; --primary-h:#17493F; --soft:#E4EFEA; --soft-line:#C7DED4;
+  --line:#DCE5E6; --focus:#1F5F52; --warn:#A33A28;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1C21; --surface:#132A30; --ink:#EAF3F2; --body:#BCD0D2; --muted:#92A9AE;
+    --primary:#3E9480; --primary-h:#55AB96; --soft:#17373A; --soft-line:#2A5750;
+    --line:#27454B; --focus:#EAF3F2; --warn:#F0937E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1C21; --surface:#132A30; --ink:#EAF3F2; --body:#BCD0D2; --muted:#92A9AE;
+  --primary:#3E9480; --primary-h:#55AB96; --soft:#17373A; --soft-line:#2A5750;
+  --line:#27454B; --focus:#EAF3F2; --warn:#F0937E;
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--body);font-family:Figtree,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{color:var(--ink);line-height:1.12;margin:0;font-weight:800;letter-spacing:-.025em}
+.c{max-width:1180px;margin:0 auto;padding:0 24px}
+@media (max-width:560px){.c{padding:0 16px}}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:8px}
+
+
+/* prisbanner øverst på beregnersiden */
+.prishero{background:var(--soft);border-bottom:1px solid var(--soft-line)}
+.prishero .c{padding:34px 24px 36px;text-align:center}
+.prishero .crumbrow{text-align:left;margin-bottom:22px}
+.plabel{font-size:16px;color:var(--body);font-weight:600;margin:0 0 10px}
+.plabel b{color:var(--ink);font-weight:700}
+.pbig{font-size:clamp(38px,8.5vw,64px);font-weight:800;color:var(--ink);letter-spacing:-.035em;line-height:1.02;margin:0}
+.pbig .kr{font-size:.46em;font-weight:700;letter-spacing:-.01em;margin-left:6px;color:var(--body)}
+.pmeta{font-size:16px;color:var(--body);margin:14px 0 0}
+.pwait{font-size:clamp(26px,5.2vw,36px);font-weight:800;color:var(--ink);letter-spacing:-.03em;margin:0}
+.pprog{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--soft-line);
+  border-radius:999px;padding:8px 16px;font-size:15px;font-weight:600;color:var(--body);margin-top:16px}
+.phandling{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+@media (max-width:560px){.prishero .c{padding:22px 16px 30px}.phandling .btn{width:100%}}
+
+.crumb{color:var(--primary);text-decoration:none;letter-spacing:0;font-weight:700;font-size:15px}
+.crumb:hover{text-decoration:underline}
+.laesmere{padding:8px 0 64px}
+.laesmere h2{font-size:22px;margin-bottom:16px}
+.lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:900px){.lgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.lgrid{grid-template-columns:1fr}}
+.lkort{display:block;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;text-decoration:none}
+.lkort:hover{border-color:var(--primary)}
+.lkort b{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}
+.lkort span{display:block;font-size:15px;color:var(--muted)}
+.cta-slut{background:var(--ink);color:#C9DBD8}
+.cta-slut .c{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:46px 24px}
+.cta-slut h2{color:#fff;font-size:clamp(23px,3.2vw,30px)}
+.cta-slut p{margin:8px 0 0}
+
+.hero{padding:56px 0 8px}
+.eyebrow{font-size:14px;font-weight:700;letter-spacing:.14em;color:var(--muted);margin:0 0 14px}
+.hero h1{font-size:clamp(32px,5.2vw,54px);max-width:16em}
+.hero p.lead{font-size:19px;max-width:34em;margin:18px 0 0}
+@media (max-width:560px){.hero{padding:34px 0 4px}.hero p.lead{font-size:17px}}
+
+/* forside: ét enkelt indgangspunkt */
+.start{padding:84px 0 80px;text-align:center}
+.start .inner{max-width:660px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--soft);color:var(--primary);
+  font-size:15px;font-weight:700;border-radius:999px;padding:7px 16px;margin-bottom:22px}
+.start h1{font-size:clamp(33px,5.6vw,52px);margin-bottom:18px}
+.start .sub{font-size:19px;margin:0 auto 34px;max-width:30em}
+.startform{display:flex;gap:12px;max-width:520px;margin:0 auto}
+.startform input{flex:1;min-width:0;font-size:19px;padding:17px 18px;text-align:center;letter-spacing:.04em}
+.startform .btn{padding:17px 28px;font-size:17px}
+@media (max-width:560px){
+  .start{padding:44px 0 56px}
+  .startform{flex-direction:column}
+  .startform .btn{width:100%}
+}
+.boble{position:relative;display:inline-block;background:var(--primary);color:#fff;font-weight:700;
+  font-size:clamp(15px,3.4vw,17px);line-height:1.35;border-radius:16px;padding:13px 20px;margin-bottom:30px;
+  max-width:22em;text-align:left;box-shadow:0 10px 24px rgba(16,60,52,.22)}
+.boble::after{content:"";position:absolute;left:34px;bottom:-11px;width:0;height:0;
+  border-left:11px solid transparent;border-right:11px solid transparent;border-top:12px solid var(--primary)}
+@media (max-width:560px){.boble{margin-bottom:26px}.boble::after{left:28px}}
+.startnote{margin-top:16px;font-size:15px;color:var(--muted)}
+.startnote button{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--primary);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.tre{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;margin-top:44px;font-size:16px;font-weight:600;color:var(--body)}
+.tre span{display:flex;align-items:center;gap:9px}
+@media (max-width:560px){.tre{flex-direction:column;align-items:center;gap:12px;margin-top:32px}}
+
+.grid{display:grid;grid-template-columns:1.45fr 1fr;gap:24px;align-items:start;padding:34px 0 64px}
+@media (max-width:980px){.grid{grid-template-columns:1fr;padding:26px 0 48px}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:30px}
+@media (max-width:560px){.card{padding:20px;border-radius:14px}}
+.chead{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.chead h2{font-size:26px}
+.pill{font-size:14px;font-weight:700;color:var(--primary);background:var(--soft);border-radius:999px;padding:6px 14px;white-space:nowrap}
+
+label.f{display:block;font-weight:700;font-size:16px;color:var(--ink);margin:0 0 8px}
+.fieldrow{display:flex;gap:12px;align-items:flex-start}
+.fieldrow input{flex:1;min-width:0}
+input,select{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:11px;padding:14px 15px}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 21px) calc(50% + 2px),calc(100% - 15px) calc(50% + 2px);background-size:6px 6px;background-repeat:no-repeat;padding-right:44px;cursor:pointer}
+input:focus,select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(31,95,82,.16)}
+.help{font-size:15px;color:var(--muted);margin:10px 0 0}
+.err{color:var(--warn);font-size:15px;margin:8px 0 0;min-height:1em;font-weight:600}
+.linkbtn{background:none;border:0;padding:0;margin:12px 0 0;font:inherit;font-weight:700;color:var(--primary);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font:inherit;font-weight:700;border-radius:11px;padding:14px 24px;border:0;cursor:pointer;background:var(--primary);color:#fff;white-space:nowrap}
+.btn:hover{background:var(--primary-h)}
+.btn.block{width:100%}
+.btn.quiet{background:var(--soft);color:var(--primary)}
+.btn.quiet:hover{background:var(--soft-line)}
+.btn.small{padding:11px 18px;font-size:15px}
+
+.found{background:var(--soft);border-radius:14px;padding:18px 20px;margin-top:20px}
+.found .fh{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.found b.n{color:var(--ink);font-size:18px}
+.tagx{font-size:13px;font-weight:700;color:var(--primary);background:var(--surface);border:1px solid var(--soft-line);border-radius:999px;padding:4px 12px}
+.kv{display:grid;gap:2px;margin-top:14px}
+.kv .r{display:flex;justify-content:space-between;gap:14px;font-size:16px;padding:7px 0;border-top:1px solid var(--soft-line)}
+.kv .r:first-child{border-top:0}
+.kv .r b{color:var(--ink);font-weight:600}
+.kv .r span{text-align:right}
+.code{font-variant-numeric:tabular-nums}
+
+.confirm{background:var(--surface);border:1.5px solid var(--soft-line);border-radius:12px;padding:16px 18px;margin-top:14px}
+.confirm .q{font-weight:700;color:var(--ink);margin:0 0 4px}
+.confirm .s{font-size:15px;color:var(--muted);margin:0 0 14px}
+.confirm .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.confirm input{width:120px}
+.okline{display:flex;gap:9px;align-items:center;color:var(--primary);font-weight:700;font-size:15px;margin-top:12px}
+
+hr.sep{border:0;border-top:1px solid var(--line);margin:28px 0}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:620px){.qgrid{grid-template-columns:1fr}}
+.full{grid-column:1/-1}
+.radios{display:flex;gap:10px}
+.radios button{flex:1;font:inherit;font-weight:600;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:11px;padding:13px;cursor:pointer}
+.radios button:hover{border-color:var(--primary)}
+.radios button[aria-pressed="true"]{border-color:var(--primary);background:var(--soft);color:var(--primary)}
+
+.side{position:sticky;top:24px}
+@media (max-width:980px){.side{position:static}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;border-top:5px solid var(--primary)}
+@media (max-width:560px){.panel{padding:20px;border-radius:14px}}
+.panel h2{font-size:24px}
+.panel .intro{font-size:16px;color:var(--muted);margin:10px 0 0}
+.ticks{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:13px}
+.ticks li{display:flex;gap:11px;align-items:flex-start;font-size:16px}
+.ti{flex:none;width:24px;height:24px;border-radius:50%;background:var(--soft);display:grid;place-items:center;margin-top:1px}
+.privacy{display:flex;gap:11px;align-items:flex-start;margin-top:22px;padding-top:20px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+.privacy b{color:var(--ink);font-weight:700}
+.privacy svg{flex:none;margin-top:3px}
+.breakdown{margin-top:20px}
+.breakdown .ln{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-top:1px solid var(--line);font-size:16px}
+.breakdown .ln:first-child{border-top:0}
+.breakdown .ln b{color:var(--ink);font-weight:600}
+.breakdown .ln span{text-align:right}
+.breakdown .ln.tot{border-top:2px solid var(--ink);font-weight:800;color:var(--ink)}
+.note{margin-top:18px;font-size:14px;color:var(--muted)}
+
+.band{padding:64px 0;border-top:1px solid var(--line)}
+.band.tinted{background:var(--surface)}
+.sh{max-width:42em;margin-bottom:30px}
+.sh h2{font-size:clamp(26px,3.6vw,36px)}
+.sh p{margin:12px 0 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:820px){.two{grid-template-columns:1fr}}
+.cov{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:24px}
+.cov .ico{width:46px;height:46px;border-radius:12px;background:var(--soft);display:grid;place-items:center;color:var(--primary);margin-bottom:16px}
+.cov h3{font-size:19px;margin-bottom:8px}
+.cov p{margin:0;font-size:16px}
+.cov ul{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:10px;font-size:16px}
+.cov ul li{display:flex;gap:10px;align-items:flex-start}
+.cov ul svg{flex:none;margin-top:5px}
+.cov ul b{color:var(--ink);font-weight:700}
+.cov a{color:var(--primary);font-weight:600}
+
+table.pris{width:100%;border-collapse:collapse;font-size:16px;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+table.pris th,table.pris td{text-align:left;padding:13px 16px;border-top:1px solid var(--line)}
+table.pris thead th{border-top:0;background:var(--soft);color:var(--ink);font-weight:700;font-size:15px}
+table.pris td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.pris td b{color:var(--ink);font-weight:600}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+.prose{max-width:44em}
+.prose h3{font-size:20px;margin:28px 0 8px}
+.prose p{margin:0 0 14px}
+.prose ul{margin:0 0 14px;padding-left:22px}
+.prose li{margin-bottom:7px}
+
+details{border-top:1px solid var(--line);padding:18px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700;color:var(--ink);list-style:none;font-size:17px;padding-right:28px;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:0;top:-2px;font-size:22px;font-weight:600;color:var(--primary)}
+details[open] summary::after{content:"\2013"}
+details p{margin:12px 0 0;font-size:16px;max-width:46em}
+
+footer{background:var(--surface);border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+footer .c{display:grid;grid-template-columns:2fr 1fr;gap:28px;padding:44px 24px}
+footer h4{color:var(--ink);margin:0 0 10px;font-size:16px}
+footer p{margin:0 0 10px;max-width:34em}
+@media (max-width:760px){footer .c{grid-template-columns:1fr}}
+
+/* popup */
+.ovl{position:fixed;inset:0;z-index:60;background:rgba(8,28,33,.55);display:grid;place-items:center;padding:20px}
+.modal{background:var(--surface);border-radius:20px;width:min(560px,100%);max-height:calc(100dvh - 40px);overflow-y:auto;padding:30px;box-shadow:0 28px 70px rgba(5,20,25,.35)}
+@media (max-width:560px){.modal{padding:22px;border-radius:16px}.ovl{padding:12px}}
+.mtop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.mtop .pill{margin:0}
+.xbtn{background:none;border:0;padding:6px;margin:-6px;cursor:pointer;color:var(--muted);line-height:0;border-radius:8px}
+.xbtn:hover{color:var(--ink)}
+.modal h3{font-size:clamp(22px,4.4vw,27px);margin-bottom:10px}
+.modal .mlead{font-size:16px;color:var(--body);margin:0 0 20px}
+.bigval{display:flex;align-items:baseline;gap:10px;background:var(--soft);border-radius:14px;padding:18px 20px;margin-bottom:18px}
+.bigval .num{font-size:34px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1}
+.bigval .cap{font-size:15px;color:var(--body)}
+.mfield{margin-bottom:6px}
+.mfield{margin-bottom:14px}
+.mfield:last-of-type{margin-bottom:0}
+.hbox{border:1px solid var(--line);border-radius:12px;margin:18px 0 4px;overflow:hidden}
+.hbox summary{padding:14px 16px;font-size:16px;background:var(--bg)}
+.hbox summary::after{top:12px;right:16px}
+.hbox .hin{padding:4px 16px 18px;font-size:15px;color:var(--body);background:var(--bg)}
+.hbox .hin p{margin:10px 0 0}
+.hbox .hin ul{margin:10px 0 0;padding-left:20px}
+.hbox .hin li{margin-bottom:6px}
+.mact{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:24px}
+.steps{display:flex;gap:6px}
+.steps i{width:22px;height:4px;border-radius:2px;background:var(--line)}
+.steps i.on{background:var(--primary)}
+body.locked{overflow:hidden}
+
+.svar{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:22px}
+.svar .sh2{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.svar .sh2 b{color:var(--ink);font-size:17px}
+.svar .r{display:flex;justify-content:space-between;gap:14px;font-size:16px;padding:9px 0;border-top:1px solid var(--line)}
+.svar .r:first-of-type{border-top:0}
+.svar .r b{color:var(--ink);font-weight:600}
+.svar .r span{text-align:right}
+
+.mscroll{max-height:46vh;overflow-y:auto;margin:4px -4px 0;padding:0 4px}
+.consent.big{font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);
+  border-radius:12px;padding:16px 18px;margin-top:12px;align-items:flex-start;cursor:pointer}
+.consent.big input{width:22px;height:22px;margin-top:1px}
+.consent.big span{line-height:1.45}
+.mscroll .mgruppe{margin-bottom:18px}
+.mscroll .mghead b{font-size:16px}
+.gemt{display:flex;gap:10px;align-items:flex-start;background:var(--soft);border-radius:12px;
+  padding:14px 16px;margin-top:20px;font-size:15px;color:var(--body)}
+.gemt b{color:var(--ink)}
+.gemt svg{flex:none;margin-top:3px}
+.done/* kontaktfelter */
+.felter{display:grid;gap:14px;margin-top:24px}
+.felt label{display:block;font-size:14px;font-weight:700;color:var(--muted);margin:0 0 6px;letter-spacing:.01em}
+.fwrap{position:relative;display:flex;align-items:center}
+.fwrap input{width:100%;font-size:17px;padding:15px 44px 15px 46px;border-radius:12px;border:1.5px solid var(--line);
+  background:var(--surface);color:var(--ink)}
+.fwrap input::placeholder{color:var(--muted);opacity:.7}
+.fikon{position:absolute;left:15px;color:var(--muted);pointer-events:none;transition:color .15s}
+.fwrap input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(31,95,82,.16);outline:none}
+.fwrap input:focus ~ .fikon,.felt:focus-within .fikon{color:var(--primary)}
+.fok{position:absolute;right:15px;color:var(--primary);opacity:0;transform:scale(.6);transition:opacity .18s,transform .18s}
+.felt.udfyldt .fok{opacity:1;transform:scale(1)}
+.felt.udfyldt .fwrap input{border-color:var(--soft-line)}
+.felt.udfyldt label{color:var(--primary)}
+@media (prefers-reduced-motion: reduce){.fok{transition:none}}
+
+.venteboks{background:var(--surface);border:1px solid var(--soft-line);border-radius:14px;
+  padding:20px 22px;margin:22px auto 0;max-width:34em;text-align:left}
+.vtitel{font-weight:700;color:var(--ink);font-size:17px;margin:0 0 6px}
+.vtekst{font-size:16px;color:var(--body);margin:0}
+.vtekst b{color:var(--ink);font-weight:700}
+@media (max-width:560px){.venteboks{padding:17px 18px}}
+
+/* engangskode */
+.kodefelt{display:flex;gap:9px;justify-content:center;margin:26px 0 4px}
+.kodefelt input{width:48px;height:60px;padding:0;text-align:center;font-size:26px;font-weight:800;
+  color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:12px;
+  font-variant-numeric:tabular-nums;caret-color:var(--primary)}
+.kodefelt input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(31,95,82,.16)}
+@media (max-width:420px){.kodefelt{gap:6px}.kodefelt input{width:42px;height:54px;font-size:23px}}
+.kodefelt.ryst{animation:ryst .35s}
+@keyframes ryst{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media (prefers-reduced-motion: reduce){.kodefelt.ryst{animation:none}}
+.kodehint{font-size:14px;color:var(--muted);margin:14px 0 0}
+.kodehint b{color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.08em}
+.linkbtn[disabled]{color:var(--muted);text-decoration:none;cursor:default}
+.err/* selskabets svarside */
+.selskabtop{background:var(--ink);color:#C9DBD8}
+.selskabtop .c{padding:34px 24px 32px}
+.stoplabel{font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7FA69D;margin:0 0 12px}
+.selskabtop h1{color:#fff;font-size:clamp(26px,4.4vw,38px);margin:0}
+.smeta{font-size:16px;margin:12px 0 0}
+.smeta b{color:#fff}
+.tbem{display:flex;gap:9px;align-items:flex-start;font-size:15px;color:var(--body);margin-top:10px}
+.tbem svg{flex:none;margin-top:3px}
+.felt select,.felt input[type=date]{width:100%;font-size:17px;padding:15px 16px;border-radius:12px;
+  border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
+.felt .radios{margin-top:0}
+
+.midt{text-align:center}
+
+.midt{text-align:center}
+.midt{text-align:center}
+.talblok{text-align:center;background:var(--soft);border-radius:18px;padding:30px 20px 24px;margin:22px 0 4px}
+.talnum{font-size:clamp(64px,17vw,88px);font-weight:800;color:var(--ink);letter-spacing:-.045em;line-height:.95;font-variant-numeric:tabular-nums}
+.talenh{font-size:19px;font-weight:700;color:var(--ink);margin-top:6px}
+.talkilde{font-size:15px;color:var(--muted);margin-top:8px}
+.mvalg{display:grid;gap:10px;margin-top:26px}
+.btn.block{width:100%}
+.stortal{font-size:30px!important;font-weight:800;text-align:center;letter-spacing:-.02em;padding:18px 16px!important}
+.modal h3{text-wrap:balance}
+
+/* trinbjælke */
+.flow{list-style:none;display:flex;align-items:center;justify-content:center;gap:0;margin:0 0 26px;padding:0;flex-wrap:wrap}
+.flow li{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:15px;font-weight:600}
+.flow li::after{content:"";width:28px;height:2px;background:var(--soft-line);margin:0 12px;border-radius:1px}
+.flow li:last-child::after{display:none}
+.flow .fnum{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  background:var(--surface);border:1.5px solid var(--soft-line);font-size:14px;font-weight:700;color:var(--muted)}
+.flow li.aktiv{color:var(--ink)}
+.flow li.aktiv .fnum{background:var(--primary);border-color:var(--primary);color:#fff}
+.flow li.faerdig .fnum{background:var(--surface);border-color:var(--primary);color:var(--primary)}
+.flow li.faerdig{color:var(--body)}
+@media (max-width:700px){
+  .flow li::after{width:14px;margin:0 7px}
+  .flow .ftxt{display:none}
+  .flow li.aktiv .ftxt{display:inline}
+}
+
+/* knapper og spinner */
+.btn.stor{padding:17px 34px;font-size:18px}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;
+  display:inline-block;animation:snurr .7s linear infinite}
+@keyframes snurr{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.spin{animation-duration:2s}}
+.retlink{margin:16px 0 0}
+.retlink button{background:none;border:0;padding:0;font:inherit;font-size:15px;font-weight:700;
+  color:var(--primary);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.tdiff{display:block;font-size:13px;font-weight:700;color:var(--muted);letter-spacing:0;text-align:right}
+
+/* fast handling på mobil */
+.sticky{position:sticky;bottom:0;z-index:15;background:var(--surface);border-top:1px solid var(--line);
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));margin:24px -20px -20px;display:none}
+.sticky .btn{width:100%}
+@media (max-width:980px){.sticky{display:block}.sticky + .actions{display:none}}
+
+/* tilbudsoverblik */
+.tilbudliste{display:grid;gap:12px}
+.tkort{border:1.5px solid var(--line);border-radius:13px;padding:16px 18px;background:var(--surface)}
+.tkort.valgt{border-color:var(--primary);background:var(--soft)}
+.trow{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.tnavn{font-weight:700;color:var(--ink);font-size:17px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.tbedst{font-size:12px;font-weight:700;background:var(--primary);color:#fff;border-radius:4px;padding:3px 9px}
+.tpris{font-size:23px;font-weight:800;color:var(--ink);letter-spacing:-.02em;white-space:nowrap}
+.tpris span{display:block;font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0;text-align:right}
+.tstatus{font-size:15px;font-weight:600;color:var(--muted);white-space:nowrap}
+.tmeta{font-size:14px;color:var(--muted);margin-top:8px}
+.tact{margin-top:14px}
+
+/* valg af modtagere */
+.mgruppe{margin-bottom:26px}
+.mgruppe:last-child{margin-bottom:0}
+.mghead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px;flex-wrap:wrap}
+.mghead b{display:block;color:var(--ink);font-size:18px}
+.mghead span{display:block;font-size:15px;color:var(--muted);margin-top:2px}
+.mliste{display:grid;gap:8px}
+.mrow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;cursor:pointer;
+  background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:13px 15px;color:var(--ink)}
+.mrow:hover{border-color:var(--primary)}
+.mrow[aria-pressed="true"]{border-color:var(--primary);background:var(--soft)}
+.mrow .box{flex:none;width:20px;height:20px;border-radius:5px;border:1.5px solid var(--muted);display:grid;place-items:center}
+.mrow[aria-pressed="true"] .box{background:var(--primary);border-color:var(--primary)}
+.mrow[aria-pressed="true"] .box::after{content:"";width:9px;height:5px;border:2px solid #fff;border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
+.mnavn{flex:1;font-weight:600}
+.mstatus{flex:none;font-size:12px;font-weight:700;border-radius:4px;padding:3px 9px;white-space:nowrap}
+.mstatus.aftale{background:var(--soft);color:var(--primary);border:1px solid var(--soft-line)}
+.mstatus.afventer{color:var(--muted);border:1px solid var(--line)}
+@media (max-width:520px){.mstatus{display:none}}
+
+.consent{display:flex;gap:11px;align-items:flex-start;margin-top:16px;font-size:15px;color:var(--body)}
+.consent input{margin-top:3px;width:19px;height:19px;accent-color:var(--primary);flex:none}
+.done{margin-top:16px;padding:18px;border-radius:12px;background:var(--soft);font-size:16px;color:var(--ink)}
+.actions{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:24px;flex-wrap:wrap}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<main id="app"></main>
+
+<footer>
+  <div class="c">
+    <div>
+      <h4>beregn arbejdsskade.dk</h4>
+      <p>Arbejdsskadeforsikring til små og mellemstore virksomheder. Siden er under opbygning, og alle priser er vejledende estimater.</p>
+      <p>Vi sælger ikke selv forsikringer. Vi indhenter priser og sender jeres valg videre, og aftalen indgås direkte mellem jer og forsikringsselskabet.</p>
+      <p>Kan også nås på billigarbejdsskadeforsikring.dk, arbejdskade.dk og tilbudarbejdsskade.dk.</p>
+      <p>Forsikringsbetingelser, privatlivspolitik og cookies kommer inden lancering.</p>
+    </div>
+    <div><h4>Sider</h4><p id="fnav"></p></div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebSite","@id":"https://beregnarbejdsskade.dk/#website","url":"https://beregnarbejdsskade.dk/","name":"beregnarbejdsskade.dk","inLanguage":"da-DK","description":"Beregn prisen på arbejdsskadeforsikring til din virksomhed ud fra CVR-nummer, branchekode og årsværk."},
+{"@type":"WebPage","@id":"https://beregnarbejdsskade.dk/#webpage","url":"https://beregnarbejdsskade.dk/","name":"Arbejdsskadeforsikring – beregn prisen på 2 minutter","isPartOf":{"@id":"https://beregnarbejdsskade.dk/#website"},"inLanguage":"da-DK","description":"Indtast CVR-nummer og få et vejledende prisestimat på arbejdsskadeforsikring. Vi henter branchekode og antal årsværk, så du kun skal bekræfte tallene."},
+{"@type":"Service","name":"Arbejdsskadeforsikring til virksomheder","serviceType":"Arbejdsskadeforsikring","areaServed":{"@type":"Country","name":"Danmark"},"audience":{"@type":"BusinessAudience","name":"Små og mellemstore virksomheder"},"description":"Lovpligtig arbejdsskadeforsikring der dækker arbejdsulykker og erhvervssygdomme for virksomhedens ansatte. Prisen beregnes ud fra virksomhedens branche og antal årsværk."},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Hvornår er arbejdsskadeforsikring lovpligtig?","acceptedAnswer":{"@type":"Answer","text":"Fra den dag virksomheden har mindst én ansat, også selvom det kun er få timer om ugen. Kravet gælder uanset virksomhedens størrelse og selskabsform og følger af arbejdsskadesikringsloven."}},
+{"@type":"Question","name":"Hvad skal en arbejdsgiver konkret have på plads?","acceptedAnswer":{"@type":"Answer","text":"To ting: en forsikring mod arbejdsulykker tegnet i et forsikringsselskab med tilladelse til at tegne arbejdsulykkesforsikring i Danmark, og tilmelding med bidrag til Arbejdsmarkedets Erhvervssikring, der dækker erhvervssygdomme. Begge dele skal være på plads, før den første medarbejder møder på arbejde."}},
+{"@type":"Question","name":"Hvad sker der hvis arbejdsskadeforsikringen mangler?","acceptedAnswer":{"@type":"Answer","text":"Den tilskadekomne medarbejder får sin erstatning alligevel, men virksomheden kan blive afkrævet beløbet bagefter, og der kan komme bøde oveni, når sikringspligten ikke er opfyldt."}},
+{"@type":"Question","name":"Hvornår skal en arbejdsulykke anmeldes?","acceptedAnswer":{"@type":"Answer","text":"Når medarbejderen ikke kan passe sit sædvanlige arbejde i mindst én dag ud over selve skadesdagen, eller når ulykken kan give ret til erstatning. Anmeldelsen er arbejdsgiverens pligt og sker digitalt, og virksomhedens forsikringspolice skal være oprettet, før anmeldelsen kan sendes."}},
+{"@type":"Question","name":"Hvem regnes som arbejdsgiver i forhold til anmeldelsespligten?","acceptedAnswer":{"@type":"Answer","text":"Det afgøres ud fra en samlet vurdering af, hvem der instruerer og fører tilsyn med arbejdet, stiller arbejdssted og udstyr til rådighed, bærer risikoen for resultatet og betaler lønnen. Ved indlejet arbejdskraft fra en entreprenør eller et vikarbureau ligger arbejdsgiveransvaret som udgangspunkt hos den virksomhed, der får arbejdet udført."}},
+{"@type":"Question","name":"Hvad koster en arbejdsskadeforsikring?","acceptedAnswer":{"@type":"Answer","text":"Prisen beregnes pr. årsværk, og satsen afhænger af branchen. Kontor og rådgivning ligger typisk lavest, mens byggeri, transport og landbrug ligger højest, fordi risikoen for skader er større. Oven i præmien kommer det lovpligtige AES-bidrag pr. årsværk."}},
+{"@type":"Question","name":"Hvordan finder jeg en billig arbejdsskadeforsikring?","acceptedAnswer":{"@type":"Answer","text":"Sammenlign prisen på den samme dækning hos flere selskaber, sørg for at branchekoden passer til det arbejde der faktisk udføres, og hold antallet af årsværk opdateret. En forkert branchekode er den hyppigste årsag til at prisen bliver højere end nødvendigt."}},
+{"@type":"Question","name":"Hvad er AES-bidraget?","acceptedAnswer":{"@type":"Answer","text":"Arbejdsmarkedets Erhvervssikring håndterer erstatning ved erhvervssygdomme. Bidraget opkræves pr. årsværk og afhænger af branchen. Det er lovpligtigt og kommer oven i selve forsikringspræmien."}},
+{"@type":"Question","name":"Hvad består en arbejdsskadeerstatning af?","acceptedAnswer":{"@type":"Answer","text":"Arbejdsskadesikringsloven opdeler erstatningen i fire poster: tab af erhvervsevne, godtgørelse for varigt mén, udgifter til sygebehandling, genoptræning og hjælpemidler, samt erstatning til efterladte ved dødsfald i form af overgangsbeløb og tab af forsørger. Tabt arbejdsfortjeneste og godtgørelse for svie og smerte er ikke en del af arbejdsskadeforsikringen, men hører under erstatningsansvarsloven og kan kun kræves, hvis virksomheden har handlet ansvarspådragende."}},
+{"@type":"Question","name":"Hvad er forskellen på arbejdsskadeforsikring og erhvervsansvarsforsikring?","acceptedAnswer":{"@type":"Answer","text":"Arbejdsskadeforsikringen dækker medarbejderens tab efter en arbejdsskade uanset skyld, og den er lovpligtig, når virksomheden har ansatte. Erhvervsansvarsforsikringen dækker de krav, der kan komme oven i efter erstatningsansvarsloven, for eksempel tabt arbejdsfortjeneste og svie og smerte, når virksomheden kan bebrejdes noget. Den er ikke lovpligtig."}},
+{"@type":"Question","name":"Hvad er erhvervsevnetab, og hvornår giver det erstatning?","acceptedAnswer":{"@type":"Answer","text":"Erhvervsevnetab er den varige nedgang i det, medarbejderen kan tjene efter skaden, sammenlignet med før. Grænsen for erstatning går ved et erhvervsevnetab på 15 procent. Højesteret har i en dom af 28. april 2026 i sag BS-33630/2025-HJR hjemvist en sag til Ankestyrelsen og henvist til sin tidligere praksis, hvorefter en tilskadekommen kan have ret til erstatning svarende til 15 procents erhvervsevnetab, hvis arbejdsskaden medfører en klar og varig indtægtsnedgang på fem procent eller derover. Arbejdsskaden behøver ikke at være den eneste årsag til den nedsatte erhvervsevne, men kan indgå i et samlet årsagskompleks."}},
+{"@type":"Question","name":"Hvad er et årsværk?","acceptedAnswer":{"@type":"Answer","text":"Et årsværk svarer til én fuldtidsansat i et helt år. To medarbejdere på halv tid tæller tilsammen som ét årsværk. Antallet af årsværk fremgår af virksomhedens udvidede oplysninger i CVR-registret."}},
+{"@type":"Question","name":"Hvad sker der hvis antallet af ansatte ændrer sig?","acceptedAnswer":{"@type":"Answer","text":"Man oplyser det forventede antal årsværk ved tegning. Når året er gået, reguleres præmien efter det faktiske antal, så virksomheden hverken betaler for lidt eller for meget."}}
+]}]}
+</script>
+
+<script>
+(function(){
+  var A={aarsvaerk:'',bekraeftet:false,branche:''};
+
+  // [nøgle, navn, ulykkespræmie pr. årsværk, AES-bidrag pr. årsværk]
+  var BRANCHER=[
+    ['kontor','Kontor, rådgivning og administration',700,260],
+    ['it','IT og software',650,250],
+    ['detail','Detail og webshop',1500,620],
+    ['restaurant','Restauration og café',2700,980],
+    ['haandvaerk','Håndværk og byggeri',6300,2300],
+    ['produktion','Produktion og værksted',5000,1950],
+    ['transport','Transport og lager',5800,2100],
+    ['landbrug','Landbrug og gartneri',7000,2450],
+    ['sundhed','Sundhed, pleje og skønhed',2000,900],
+    ['andet','Andet',2600,950]
+  ];
+  var MINPRAEMIE=1850, SPAEND=0.12;
+
+  // Branchekode (DB07) -> prisgruppe. Samme opslag som backend skal bruge på CVR-svaret.
+  function gruppeFraKode(kode){
+    var h=parseInt(String(kode).replace(/\D/g,'').slice(0,2),10);
+    if(h>=1&&h<=3) return 'landbrug';
+    if(h>=10&&h<=33) return 'produktion';
+    if(h>=41&&h<=43) return 'haandvaerk';
+    if(h>=45&&h<=47) return 'detail';
+    if(h>=49&&h<=53) return 'transport';
+    if(h>=55&&h<=56) return 'restaurant';
+    if(h>=58&&h<=63) return 'it';
+    if(h>=64&&h<=82) return 'kontor';
+    if((h>=86&&h<=88)||h===96) return 'sundhed';
+    return 'andet';
+  }
+
+  // Prototypesvar. I produktion kommer disse felter fra CVR-opslaget via vores egen backend.
+  var DEMO={
+    '12345678':{navn:'Eksempelvirksomhed ApS',kode:'43.32.00',tekst:'Tømrer- og bygningssnedkerarbejde',aarsvaerk:4.2,periode:'2. kvartal 2026'},
+    '87654321':{navn:'Nordlys Rådgivning ApS',kode:'70.22.00',tekst:'Virksomhedsrådgivning og anden rådgivning om driftsledelse',aarsvaerk:11.0,periode:'2. kvartal 2026'},
+    '11223344':{navn:'Søndergaard Transport A/S',kode:'49.41.00',tekst:'Vejgodstransport',aarsvaerk:23.5,periode:'1. kvartal 2026'}
+  };
+  function slaOp(cvr){
+    var d=DEMO[cvr];
+    if(!d) d={navn:'Virksomhed '+cvr+' ApS',kode:'43.32.00',tekst:'Tømrer- og bygningssnedkerarbejde',aarsvaerk:4.2,periode:'2. kvartal 2026'};
+    return d;
+  }
+
+  function branche(k){var r=null;BRANCHER.forEach(function(b){if(b[0]===k)r=b});return r}
+  function klar(){return !!(A.branche&&A.aarsvaerk&&A.bekraeftet)}
+  function beregn(){
+    if(!klar()) return null;
+    var b=branche(A.branche), ans=Number(A.aarsvaerk);
+    var ulykke=Math.max(MINPRAEMIE,Math.round(ans*b[2]));
+    var aes=Math.round(ans*b[3]);
+    var total=ulykke+aes;
+    return {ulykke:ulykke,aes:aes,total:total,lav:Math.round(total*(1-SPAEND)/100)*100,hoej:Math.round(total*(1+SPAEND)/100)*100,navn:b[1],ans:ans,sats:b[2]};
+  }
+  function kr(n){return new Intl.NumberFormat('da-DK').format(Math.round(n))+' kr.'}
+  function tal(n){return new Intl.NumberFormat('da-DK').format(Math.round(n))}
+  function dec(n){return new Intl.NumberFormat('da-DK',{minimumFractionDigits:1,maximumFractionDigits:1}).format(n)}
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+  var app=document.getElementById('app');
+  var tick='<span class="ti"><svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg></span>';
+  var tickS='<svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="var(--primary)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>';
+  var lock='<svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="9" width="12" height="8" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg>';
+  function ic(p){return '<svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>'}
+
+  // [hash, titel i menu, sidens h1, kort beskrivelse, sektionsfunktion, tiltænkt URL]
+  var SIDER=[
+    ['daekning','Hvad dækker den','Hvad dækker en arbejdsskadeforsikring?','Lovpligten, de to dele af dækningen og hvem der skal være omfattet.','/hvad-daekker-arbejdsskadeforsikring'],
+    ['erstatning','Erstatning','Arbejdsskadeerstatning','De fire erstatningsposter, erhvervsevnetab og hvad forsikringen ikke dækker.','/arbejdsskadeerstatning'],
+    ['priser','Priser','Priser på arbejdsskadeforsikring','Vejledende pris pr. årsværk i ni brancher.','/priser'],
+    ['billig','Billig forsikring','Billig arbejdsskadeforsikring','Fire ting der afgør, om I betaler mere end nødvendigt.','/billig-arbejdsskadeforsikring'],
+    ['betingelser','Betingelser','Sådan læser du forsikringsbetingelserne','Hvad der står i betingelserne, og hvilke punkter der koster penge at overse.','/forsikringsbetingelser'],
+    ['spoergsmaal','Spørgsmål','Spørgsmål og svar','Svar på de spørgsmål arbejdsgivere stiller oftest.','/spoergsmaal-og-svar']
+  ];
+  function sideData(k){var r=null;SIDER.forEach(function(s){if(s[0]===k)r=s});return r}
+
+  function forside(){
+    var h='<section class="start"><div class="c"><div class="inner">'
+      +'<span class="badge">'+tickS+'Lovpligtig når I har ansatte</span>'
+      +'<h1>Hvad koster jeres arbejdsskadeforsikring?</h1>'
+      +'<p class="sub">Skriv CVR-nummeret. Vi henter resten.</p>'
+      +'<div class="boble">Beregn nu, og se om du kan spare penge</div>'
+      +'<div class="startform">'
+      +'<input type="text" id="cvr" inputmode="numeric" maxlength="9" autocomplete="off" placeholder="Skriv dit CVR-nummer" value="'+esc(A.cvr?String(A.cvr).replace(/(\d{4})(\d{4})/,'$1 $2'):'')+'" aria-label="Virksomhedens CVR-nummer">'
+      +'<button class="btn" id="find">Se prisen</button></div>'
+      +'<p class="err" id="cvrerr" style="text-align:center"></p>'
+      +'<p class="startnote">Gratis og uforpligtende · <button id="demo">Prøv med eksempeldata</button></p>'
+      +'<div class="tre"><span>'+tickS+'Pris på under et minut</span><span>'+tickS+'Ingen oplysninger om løn</span><span>'+tickS+'Du binder dig ikke</span></div>'
+      +'<p class="startnote" style="margin-top:34px">Har I allerede sendt en forespørgsel? <button id="login">Se jeres tilbud</button></p>'
+      +'</div></div></section>';
+
+    h+='<div class="c"><div class="laesmere"><h2>Læs mere om arbejdsskadeforsikring</h2><div class="lgrid">'
+      + SIDER.map(function(s){return '<a class="lkort" href="#'+s[0]+'"><b>'+esc(s[2])+'</b><span>'+esc(s[3])+'</span></a>'}).join('')
+      +'</div></div></div>';
+
+    app.innerHTML=h;
+    wire();
+  }
+
+  function beregner(){
+    var h='<section class="prishero"><div class="c">'
+      +'<div class="crumbrow"><a class="crumb" href="#" id="tilbageforside">Start forfra</a></div>'
+      + trinbjaelke(1)
+      +'<div id="prishero"></div></div></section>';
+
+    h+='<div class="c"><div class="grid"><div><div class="card">'
+      +'<div class="chead"><h2>Virksomhedens oplysninger</h2><span class="pill" id="pill">Hentet fra CVR</span></div>'
+      +'<div id="firma"></div><div id="svar"></div>'
+      +'</div></div>'
+      +'<div><div class="side"><div class="panel" id="panel"></div></div></div>'
+      +'</div></div>';
+
+    app.innerHTML=h;
+    var tf=document.getElementById('tilbageforside');
+    if(tf) tf.onclick=function(e){
+      e.preventDefault();
+      A={aarsvaerk:'',bekraeftet:false,branche:''};
+      forside(); window.scrollTo(0,0);
+    };
+    firma(); svar(); opdater();
+  }
+
+  function opdater(){ prishero(); panel(); }
+
+  var FLOWTRIN=['Virksomhed','Pris','Vælg modtagere','Tilbud'];
+  function trinbjaelke(n){
+    return '<ol class="flow" aria-label="Sådan kommer I videre">'
+      + FLOWTRIN.map(function(t,i){
+          var k = i<n ? 'faerdig' : (i===n ? 'aktiv' : '');
+          return '<li class="'+k+'"><span class="fnum">'+(i<n?'✓':(i+1))+'</span>'
+               + '<span class="ftxt">'+esc(t)+'</span></li>';
+        }).join('')
+      +'</ol>';
+  }
+
+  function prishero(){
+    var el=document.getElementById('prishero'); if(!el) return;
+    var p=beregn();
+    if(!p){
+      var m=[];
+      if(A.branche&&!A.bekraeftet) m.push('bekræft antal årsværk');
+      el.innerHTML='<p class="plabel">Vejledende årspris for <b>'+esc(A.navn||'jeres virksomhed')+'</b></p>'
+        +'<p class="pwait">Næsten der</p>'
+        +'<span class="pprog">'+tickS+'Mangler: '+esc(m.join(' og '))+'</span>'
+        +'<div class="phandling"><button class="btn" id="svarnu">Besvar spørgsmålene</button></div>';
+      var s=document.getElementById('svarnu'); if(s) s.onclick=function(){aabn(0)};
+      return;
+    }
+    el.innerHTML='<p class="plabel">Vejledende årspris for <b>'+esc(A.navn)+'</b></p>'
+      +'<p class="pbig">'+tal(p.lav)+'–'+tal(p.hoej)+'<span class="kr">kr./år</span></p>'
+      +'<p class="pmeta">Inklusive AES-bidrag · svarer til '+kr(Math.round(p.total/12))+' om måneden</p>'
+      +'<div class="phandling"><button class="btn stor" id="videre2">Få tilbud fra selskaberne</button></div>'
+      +'<p class="retlink"><button id="ret2">Ret oplysningerne</button></p>';
+    document.getElementById('videre2').onclick=tegn;
+    document.getElementById('ret2').onclick=function(){aabn(0)};
+  }
+
+  function secLovpligt(){
+    var h='';
+    h+='<section class="band tinted" id="lovpligt"><div class="c"><div class="sh"><h2>Arbejdsskadeforsikring er lovpligtig</h2>'
+      +'<p>Har virksomheden bare én ansat, skal den have arbejdsskadesikring på plads. Pligten følger af arbejdsskadesikringsloven og gælder uanset selskabsform, branche og antal timer.</p></div>'
+      +'<div class="two">'
+      +'<div class="cov"><div class="ico">'+ic('<path d="M16 4l10 4v7c0 7-5 11-10 13C11 26 6 22 6 15V8z"/><path d="M12 16l3 3 6-6"/>')+'</div>'
+      +'<h3>De to ting du skal have</h3><ul>'
+      +'<li>'+tickS+'<span><b>En forsikring mod arbejdsulykker</b> tegnet i et forsikringsselskab, der har tilladelse til at tegne arbejdsulykkesforsikring i Danmark.</span></li>'
+      +'<li>'+tickS+'<span><b>Tilmelding og bidrag til Arbejdsmarkedets Erhvervssikring (AES)</b>, som dækker erhvervssygdomme. Bidraget opkræves pr. årsværk og kan ikke tegnes privat.</span></li>'
+      +'</ul><p class="help" style="margin-top:14px">Den ene erstatter ikke den anden. Du skal have begge dele, før den første medarbejder møder på arbejde.</p></div>'
+      +'<div class="cov"><div class="ico">'+ic('<circle cx="16" cy="16" r="12"/><path d="M16 10v7M16 21.5v.5"/>')+'</div>'
+      +'<h3>Hvis forsikringen mangler</h3>'
+      +'<p>Den tilskadekomne medarbejder får sin erstatning alligevel. Men når sikringspligten ikke er opfyldt, kan virksomheden blive afkrævet beløbet bagefter, og der kan komme bøde oveni.</p>'
+      +'<p style="margin-top:12px">En arbejdsulykke skal desuden anmeldes, hvis medarbejderen ikke kan passe sit sædvanlige arbejde i mindst én dag ud over selve skadesdagen. Anmeldelsen er arbejdsgiverens pligt og sker digitalt, og virksomhedens police skal være oprettet, før anmeldelsen kan sendes.</p></div>'
+      +'</div>'
+      +'<div class="two" style="margin-top:20px"><div class="cov"><h3>Hvem tæller som ansat?</h3><ul>'
+      +'<li>'+tickS+'Fuldtid, deltid, timelønnede og afløsere</li>'
+      +'<li>'+tickS+'Elever, lærlinge og praktikanter</li>'
+      +'<li>'+tickS+'Medhjælpende ægtefælle på løn</li>'
+      +'<li>'+tickS+'Ejere, der er ansat i eget selskab med løn</li>'
+      +'</ul><p class="help" style="margin-top:14px">En enkeltmandsvirksomhed uden ansatte er ikke omfattet af pligten. Ejeren kan i stedet tegne en frivillig dækning.</p></div>'
+      +'<div class="cov"><h3>Læs mere hos myndighederne</h3>'
+      +'<p>Vi er ikke en offentlig myndighed. Vil du se reglerne ved kilden, finder du dem her:</p><ul style="margin-top:14px">'
+      +'<li>'+tickS+'<a href="https://www.aes.dk/love-og-praksis/lovstof-om-arbejdsskader" target="_blank" rel="noopener">Lovstof om arbejdsskader</a> — de centrale love, bekendtgørelser og vejledninger, hos Arbejdsmarkedets Erhvervssikring</li>'
+      +'<li>'+tickS+'<a href="https://www.aes.dk/love-og-praksis/satser" target="_blank" rel="noopener">Satser på arbejdsskadeområdet</a> — de gældende satser, opdateret af AES</li>'
+      +'<li>'+tickS+'<a href="https://www.aes.dk/selvbetjening/anmeld-arbejdsulykke-eller-erhvervssygdom" target="_blank" rel="noopener">Anmeld arbejdsulykke eller erhvervssygdom</a> — selvbetjening for arbejdsgivere</li>'
+      +'<li>'+tickS+'<a href="https://at.dk/arbejdsmiljoeproblemer/ulykker/" target="_blank" rel="noopener">Arbejdstilsynet om arbejdsulykker</a> — anmeldelsespligten og hvem der regnes som arbejdsgiver</li>'
+      +'<li>'+tickS+'<a href="https://datacvr.virk.dk/" target="_blank" rel="noopener">Det Centrale Virksomhedsregister</a> — branchekode og årsværk under udvidede virksomhedsoplysninger</li>'
+      +'<li>'+tickS+'<a href="https://domstol.dk/hoejesteret/" target="_blank" rel="noopener">Højesteret</a> — domme om erhvervsevnetab og erstatning efter arbejdsskader</li>'
+      +'</ul></div></div></div></section>';
+
+    return h;
+  }
+
+  function secDaekning(){
+    var h='';
+    h+='<section class="band" id="daekning"><div class="c"><div class="sh"><h2>Hvad dækker en arbejdsskadeforsikring?</h2>'
+      +'<p>Arbejdsskadeforsikringen dækker jeres ansatte, hvis de kommer til skade på jobbet. Den består af to dele, og loven kræver, at I har begge.</p></div>'
+      +'<div class="two">'
+      +'<div class="cov"><div class="ico">'+ic('<path d="M16 4l10 4v7c0 7-5 11-10 13C11 26 6 22 6 15V8z"/><path d="M12 16l3 3 6-6"/>')+'</div>'
+      +'<h3>Arbejdsulykker</h3><p>Pludselige skader under arbejdet. Dækker tab af erhvervsevne, varigt mén, behandlingsudgifter og erstatning til efterladte.</p></div>'
+      +'<div class="cov"><div class="ico">'+ic('<path d="M16 27s-9-5-9-13a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 8-9 13-9 13z"/>')+'</div>'
+      +'<h3>Erhvervssygdomme</h3><p>Sygdomme, der kommer af arbejdet over tid, for eksempel slidskader, høretab eller allergi. Dækkes gennem det lovpligtige AES-bidrag pr. årsværk.</p></div>'
+      +'</div><div class="two" style="margin-top:20px">'
+      +'<div class="cov"><h3>Hvem skal være dækket</h3><ul>'
+      +'<li>'+tickS+'Alle ansatte, også deltid, elever og afløsere</li>'
+      +'<li>'+tickS+'Medhjælpende ægtefælle på løn</li>'
+      +'<li>'+tickS+'Ejere, der er ansat i eget selskab</li></ul></div>'
+      +'<div class="cov"><h3>Godt at vide</h3><ul>'
+      +'<li>'+tickS+'Mangler I forsikringen, kan I selv komme til at betale erstatningen</li>'
+      +'<li>'+tickS+'Selvstændige uden ansatte er ikke omfattet af kravet, men kan tegne frivillig dækning</li>'
+      +'<li>'+tickS+'Præmien reguleres, når årets faktiske antal årsværk er kendt</li></ul></div>'
+      +'</div></div></section>';
+
+    return h;
+  }
+
+  function secErstatning(){
+    var h='';
+    h+='<section class="band" id="erstatning"><div class="c"><div class="sh"><h2>Hvad består en arbejdsskadeerstatning af?</h2>'
+      +'<p>Når en skade anerkendes, er det ikke ét beløb, der udbetales. Arbejdsskadesikringsloven opdeler erstatningen i fire poster, og de bliver typisk afgjort på forskellige tidspunkter.</p></div>'
+      +'<div class="two">'
+      +'<div class="cov"><div class="ico">'+ic('<path d="M6 25V13M13 25V8M20 25V16M27 25V6"/><path d="M4 28h24"/>')+'</div>'
+      +'<h3>Tab af erhvervsevne</h3><p>Den post, der normalt fylder mest. Dækker den varige nedgang i det, medarbejderen kan tjene efter skaden. Grænsen for erstatning går ved 15 procent, og beløbet beregnes ud fra årslønnen før skaden. Ved store tab kan det løbe op i millionbeløb.</p></div>'
+      +'<div class="cov"><div class="ico">'+ic('<path d="M16 28s-10-6-10-14a6 6 0 0 1 10-4.5A6 6 0 0 1 26 14c0 8-10 14-10 14z"/>')+'</div>'
+      +'<h3>Godtgørelse for varigt mén</h3><p>Betaling for selve den varige gene i hverdagen, uafhængigt af om medarbejderen kan arbejde videre. Fastsættes i procent efter en méntabel, og der udbetales normalt fra 5 procents mén.</p></div>'
+      +'</div><div class="two" style="margin-top:20px">'
+      +'<div class="cov"><div class="ico">'+ic('<rect x="5" y="9" width="22" height="16" rx="3"/><path d="M16 13v8M12 17h8"/>')+'</div>'
+      +'<h3>Udgifter til behandling og hjælpemidler</h3><p>Sygebehandling, genoptræning, proteser, briller og andre hjælpemidler, der er nødvendige som følge af skaden. Både mens sagen behandles og varigt bagefter.</p></div>'
+      +'<div class="cov"><div class="ico">'+ic('<circle cx="12" cy="11" r="4"/><path d="M5 26c0-4 3-7 7-7s7 3 7 7"/><path d="M22 10v10M27 15h-10"/>')+'</div>'
+      +'<h3>Erstatning ved dødsfald</h3><p>Dør medarbejderen af skaden, udbetales et overgangsbeløb til de efterladte og erstatning for tab af forsørger til ægtefælle og børn. Erstatningen til børn løber som udgangspunkt, indtil de fylder 18 år.</p></div>'
+      +'</div>'
+      +'<div class="cov" style="margin-top:20px"><h3>Det dækker arbejdsskadeforsikringen ikke</h3>'
+      +'<p>Tabt arbejdsfortjeneste og godtgørelse for svie og smerte er ikke en del af arbejdsskadesikringsloven. De poster kan medarbejderen kun kræve, hvis virksomheden har handlet ansvarspådragende, og så er det erstatningsansvarsloven og virksomhedens erhvervsansvarsforsikring, der er i spil.</p>'
+      +'<p style="margin-top:12px">Forskellen er værd at kende: arbejdsskadeforsikringen dækker medarbejderens tab uanset skyld, mens erhvervsansvarsforsikringen dækker de krav, der kommer oven i, når virksomheden kan bebrejdes noget.</p></div>'
+      +'</div></section>';
+
+    return h;
+  }
+
+  function secPriser(){
+    var h='';
+    h+='<section class="band" id="priser"><div class="c"><div class="sh"><h2>Hvad koster arbejdsskadeforsikring i din branche?</h2>'
+      +'<p>Prisen beregnes pr. årsværk, og satsen følger branchen, fordi risikoen for skader er forskellig. Tallene herunder er vejledende niveauer for en virksomhed med 4 årsværk.</p></div>'
+      +'<div class="tscroll"><table class="pris"><thead><tr><th>Branche</th><th style="text-align:right">Pr. årsværk</th><th style="text-align:right">Ved 4 årsværk</th></tr></thead><tbody>';
+    BRANCHER.filter(function(b){return b[0]!=='andet'}).sort(function(x,y){return x[2]-y[2]}).forEach(function(b){
+      var est=Math.max(MINPRAEMIE,4*b[2])+4*b[3];
+      h+='<tr><td><b>'+esc(b[1])+'</b></td><td class="n">'+kr(b[2]+b[3])+'</td><td class="n">'+kr(est)+'</td></tr>';
+    });
+    h+='</tbody></table></div><p class="note" style="margin-top:14px">Beløbene er estimater inklusive AES-bidrag og erstatter ikke et konkret tilbud.</p></div></section>';
+
+    return h;
+  }
+
+  function secBillig(){
+    var h='';
+    h+='<section class="band" id="billig"><div class="c"><div class="sh"><h2>Sådan får du en billig arbejdsskadeforsikring</h2></div>'
+      +'<div class="prose">'
+      +'<p>Dækningen er fastlagt i arbejdsskadesikringsloven, så selskaberne dækker i praksis det samme. Det er derfor prisen og de oplysninger, prisen bygger på, du kan arbejde med.</p>'
+      +'<h3>Tjek at branchekoden passer</h3>'
+      +'<p>Branchekoden i CVR-registret følger ofte med fra den dag virksomheden blev stiftet, og den passer ikke altid til det arbejde, der faktisk udføres i dag. En kode i en højrisikobranche kan koste flere tusinde kroner om året for en virksomhed, hvis ansatte sidder på kontor. Det er den hyppigste grund til, at prisen bliver højere end nødvendigt.</p>'
+      +'<h3>Hold antallet af årsværk opdateret</h3>'
+      +'<p>Prisen beregnes pr. årsværk. Tallet i CVR opdateres kvartalsvis og halter derfor efter, hvis I er blevet færre. Er I gået fra otte til fem årsværk, betaler I for tre for meget, indtil tallet rettes.</p>'
+      +'<h3>Sammenlign på den samme dækning</h3>'
+      +'<p>Hent prisen hos flere selskaber på de samme oplysninger: branche og årsværk. Forskellen mellem selskaberne er typisk størst i de brancher, hvor risikoen er høj.</p>'
+      +'<h3>Husk AES-bidraget i sammenligningen</h3>'
+      +'<p>Bidraget til Arbejdsmarkedets Erhvervssikring er det samme uanset selskab, men det indgår ikke altid i den pris, der vises først. Sammenlign totalen, ikke kun præmien.</p>'
+      +'</div></div></section>';
+
+    return h;
+  }
+
+  function secBetingelser(){
+    var h='';
+    h+='<section class="band" id="betingelser"><div class="c"><div class="sh"><h2>Hvad står der i betingelserne?</h2>'
+      +'<p>Selve dækningen er fastlagt i arbejdsskadesikringsloven og er derfor stort set ens hos alle selskaber. Betingelserne handler om aftalen omkring dækningen: hvad I skal oplyse, hvornår I kan opsige, og hvad der sker, når noget i virksomheden ændrer sig. Det er de punkter, der koster penge at overse.</p></div>'
+      +'<div class="two">'
+      +'<div class="cov"><h3>Oplysningspligt</h3><p>I skal give selskabet korrekte oplysninger om branche og antal ansatte, og I skal selv give besked, når noget ændrer sig. Forkerte oplysninger kan betyde, at erstatningen nedsættes, eller at I selv kommer til at hæfte for en del af den.</p></div>'
+      +'<div class="cov"><h3>Risikoforandring</h3><p>Begynder I på en ny type arbejde, får I nye maskiner eller flytter I til nye lokaler, skal selskabet have besked med det samme. En tømrervirksomhed, der begynder at arbejde på tage, har ændret sin risiko, selvom branchekoden er den samme.</p></div>'
+      +'</div><div class="two" style="margin-top:20px">'
+      +'<div class="cov"><h3>Præmie og regulering</h3><p>Præmien opkræves forud og reguleres typisk, når årets faktiske tal er kendt. Betingelserne siger også, hvad der sker ved for sen betaling, og hvordan præmien indeksreguleres fra år til år.</p></div>'
+      +'<div class="cov"><h3>Varighed og opsigelse</h3><p>Forsikringen løber normalt et år ad gangen og fornyes automatisk. Tjek opsigelsesvarslet, før I skifter selskab, og om der er mulighed for opsigelse med kortere varsel mod et gebyr.</p></div>'
+      +'</div><div class="two" style="margin-top:20px">'
+      +'<div class="cov"><h3>Ejerskifte og konkurs</h3><p>Sælges virksomheden, eller går den konkurs, ophører forsikringen typisk ikke af sig selv. Betingelserne beskriver, hvem der hæfter for præmien, og hvornår dækningen stopper.</p></div>'
+      +'<div class="cov"><h3>Når skaden sker</h3><p>Betingelserne beskriver, hvem der anmelder hvad og hvornår. Anmeldelsen af selve arbejdsskaden sker til Arbejdsmarkedets Erhvervssikring, mens selskabet er den, der udbetaler og fører sagen.</p></div>'
+      +'</div>'
+      +'<div class="cov" style="margin-top:20px"><h3>Fire ting at tjekke, før I skriver under</h3><ul>'
+      +'<li>'+tickS+'Står den rigtige branche og det rigtige antal årsværk på policen?</li>'
+      +'<li>'+tickS+'Hvornår skal forsikringen senest opsiges, hvis I vil skifte?</li>'
+      +'<li>'+tickS+'Hvordan og hvornår reguleres præmien?</li>'
+      +'<li>'+tickS+'Hvad skal I give besked om undervejs i året?</li></ul>'
+      +'<p class="help" style="margin-top:14px">Betingelserne står altid over det, en sælger siger. Gem dem sammen med policen.</p></div>'
+      +'</div></section>';
+    return h;
+  }
+
+  function secFaq(){
+    var h='';
+    h+='<section class="band" id="spoergsmaal"><div class="c"><div class="sh"><h2>Spørgsmål og svar om arbejdsskadeforsikring</h2></div>'
+      +'<details><summary>Hvornår er arbejdsskadeforsikring lovpligtig?</summary><p>Fra den dag I har mindst én ansat, også selvom det kun er få timer om ugen. Kravet gælder uanset virksomhedens størrelse og selskabsform og følger af arbejdsskadesikringsloven.</p></details>'
+      +'<details><summary>Hvad skal jeg som arbejdsgiver konkret have på plads?</summary><p>To ting: en forsikring mod arbejdsulykker tegnet i et selskab med tilladelse til det i Danmark, og tilmelding med bidrag til Arbejdsmarkedets Erhvervssikring, der dækker erhvervssygdomme. Begge dele skal være i orden, før den første medarbejder møder på arbejde.</p></details>'
+      +'<details><summary>Hvad sker der, hvis forsikringen mangler?</summary><p>Medarbejderen får sin erstatning alligevel, men virksomheden kan blive afkrævet beløbet bagefter, og der kan komme bøde oveni.</p></details>'
+      +'<details><summary>Hvornår skal en arbejdsulykke anmeldes?</summary><p>Når medarbejderen ikke kan passe sit sædvanlige arbejde i mindst én dag ud over selve skadesdagen, eller når ulykken kan give ret til erstatning. Anmeldelsen er arbejdsgiverens pligt og sker digitalt, og virksomhedens forsikringspolice skal være oprettet, før anmeldelsen kan sendes. Reglerne for anmeldelse er ændret pr. 1. juli 2026.</p></details>'
+      +'<details><summary>Hvem regnes som arbejdsgiver?</summary><p>Det afgøres ud fra en samlet vurdering af, hvem der instruerer og fører tilsyn med arbejdet, stiller arbejdssted og udstyr til rådighed, bærer risikoen for resultatet og betaler lønnen. Bruger I indlejet arbejdskraft fra en entreprenør eller et vikarbureau, ligger arbejdsgiveransvaret og anmeldelsespligten som udgangspunkt hos den virksomhed, der får arbejdet udført.</p></details>'
+      +'<details><summary>Hvad koster en arbejdsskadeforsikring?</summary><p>Prisen beregnes pr. årsværk, og satsen afhænger af branchen. Kontor og rådgivning ligger lavest, mens byggeri, transport og landbrug ligger højest. Se de vejledende niveauer i tabellen ovenfor.</p></details>'
+      +'<details><summary>Hvad er et årsværk?</summary><p>Et årsværk svarer til én fuldtidsansat i et helt år. To medarbejdere på halv tid tæller tilsammen som ét årsværk. Antallet fremgår af virksomhedens udvidede oplysninger i CVR-registret, og det er det tal, vi henter og beder jer bekræfte.</p></details>'
+      +'<details><summary>Hvad er AES-bidraget?</summary><p>Arbejdsmarkedets Erhvervssikring håndterer erstatning ved erhvervssygdomme. Bidraget opkræves pr. årsværk og afhænger af branchen. Det er lovpligtigt og kommer oven i selve præmien.</p></details>'
+      +'<details><summary>Hvad består en arbejdsskadeerstatning af?</summary>'
+      +'<p>Arbejdsskadesikringsloven opdeler erstatningen i fire poster: tab af erhvervsevne, godtgørelse for varigt mén, udgifter til sygebehandling, genoptræning og hjælpemidler, samt erstatning til efterladte ved dødsfald i form af overgangsbeløb og tab af forsørger.</p>'
+      +'<p>Tabt arbejdsfortjeneste og godtgørelse for svie og smerte er ikke en del af arbejdsskadeforsikringen. De kan kun kræves, hvis virksomheden har handlet ansvarspådragende, og hører under erstatningsansvarsloven og erhvervsansvarsforsikringen.</p></details>'
+      +'<details><summary>Hvad er erhvervsevnetab, og hvornår giver det erstatning?</summary>'
+      +'<p>Erhvervsevnetab er den varige nedgang i det, medarbejderen kan tjene efter skaden, sammenlignet med før. Det er den post, der typisk fylder mest i en arbejdsskadeerstatning, og den vurderes af Arbejdsmarkedets Erhvervssikring med Ankestyrelsen som klageinstans.</p>'
+      +'<p>Grænsen for erstatning går ved et erhvervsevnetab på 15 procent. Højesteret har i en dom af 28. april 2026 (sag BS-33630/2025-HJR) hjemvist en sag til Ankestyrelsen til fornyet vurdering. Retten henviste til sin tidligere praksis, hvorefter en tilskadekommen kan have ret til erstatning svarende til 15 procents erhvervsevnetab, hvis arbejdsskaden medfører en klar og varig indtægtsnedgang på fem procent eller derover.</p>'
+      +'<p>Sagen slår også fast, at arbejdsskaden ikke behøver at være den eneste årsag til den nedsatte erhvervsevne. Den kan indgå som en del af et samlet årsagskompleks sammen med andre forhold. Dommen afgjorde ikke selve erstatningsspørgsmålet, men sendte sagen tilbage til ny vurdering.</p>'
+      +'<p>For en virksomhed betyder det, at selv en skade, der virker beskeden i starten, kan udvikle sig til et krav mange år senere. I den konkrete sag skete skaden i 2000 og blev først afgjort af Højesteret i 2026.</p></details>'
+      +'<details><summary>Hvorfor er prisen et spænd og ikke ét tal?</summary><p>Estimatet bygger på branche og antal årsværk. Selskabet ser også på jeres skadehistorik og de konkrete arbejdsopgaver, og derfor kan den endelige pris lande lidt over eller under.</p></details>'
+      +'<details><summary>Hvad hvis antallet af ansatte ændrer sig?</summary><p>I oplyser det forventede antal årsværk ved tegning. Når året er gået, reguleres præmien efter det faktiske antal, så I hverken betaler for lidt eller for meget.</p></details>'
+      +'</div></section>';
+    return h;
+  }
+
+  function wire(){
+    var cvr=document.getElementById('cvr'), err=document.getElementById('cvrerr'),
+        knap=document.getElementById('find');
+
+    function gyldig(){return /^\d{8}$/.test(cvr.value.replace(/\s/g,''))}
+    function opdaterKnap(){knap.disabled=!gyldig()}
+
+    function opslag(){
+      var v=cvr.value.replace(/\s/g,'');
+      if(!gyldig()){err.textContent='Et CVR-nummer består af 8 cifre.';cvr.focus();return}
+      err.textContent='';
+      knap.disabled=true;
+      knap.innerHTML='<span class="spin" aria-hidden="true"></span>Henter…';
+      setTimeout(function(){
+        var d=slaOp(v);
+        A.cvr=v; A.navn=d.navn; A.kode=d.kode; A.kodetekst=d.tekst;
+        A.aarsvaerkCvr=d.aarsvaerk; A.periode=d.periode;
+        A.aarsvaerk=String(d.aarsvaerk); A.bekraeftet=false;
+        A.branche=gruppeFraKode(d.kode);
+        beregner(); window.scrollTo(0,0); aabn(0);
+      },650);
+    }
+
+    cvr.oninput=function(){
+      var slut = cvr.selectionStart===cvr.value.length;
+      var r=cvr.value.replace(/\D/g,'').slice(0,8);
+      var ny = r.length>4 ? r.slice(0,4)+' '+r.slice(4) : r;
+      if(ny!==cvr.value){
+        cvr.value=ny;
+        if(slut) cvr.setSelectionRange(ny.length,ny.length);
+      }
+      if(err.textContent) err.textContent='';
+      opdaterKnap();
+    };
+    cvr.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();opslag()}};
+    knap.onclick=opslag;
+    document.getElementById('demo').onclick=function(){cvr.value='1234 5678';opdaterKnap();opslag()};
+    var lg=document.getElementById('login'); if(lg) lg.onclick=adgang;
+    opdaterKnap();
+    cvr.focus({preventScroll:true});
+  }
+
+  /* ---------- popup med spørgsmål ---------- */
+  var M={trin:0,aaben:false,ret:false,sidstFokus:null};
+  var TRIN=['aarsvaerk'];
+
+  function aabn(t){
+    M.trin=t||0; M.aaben=true; M.ret=false; M.sidstFokus=document.activeElement;
+    document.body.classList.add('locked');
+    var o=document.createElement('div');
+    o.className='ovl'; o.id='ovl';
+    o.innerHTML='<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mh"></div>';
+    document.body.appendChild(o);
+    o.addEventListener('mousedown',function(e){if(e.target===o)luk()});
+    document.addEventListener('keydown',tast);
+    tegnTrin();
+  }
+  function luk(){
+    var o=document.getElementById('ovl'); if(o) o.remove();
+    document.body.classList.remove('locked');
+    document.removeEventListener('keydown',tast);
+    M.aaben=false;
+    if(M.sidstFokus&&M.sidstFokus.focus&&document.contains(M.sidstFokus)) M.sidstFokus.focus({preventScroll:true});
+    firma(); svar(); opdater();
+  }
+  function tast(e){
+    if(!M.aaben) return;
+    if(e.key==='Escape'){e.preventDefault();luk();return}
+    if(e.key!=='Tab') return;
+    var f=document.querySelectorAll('#ovl button, #ovl input, #ovl select, #ovl summary');
+    if(!f.length) return;
+    var a=f[0], b=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===a){e.preventDefault();b.focus()}
+    else if(!e.shiftKey&&document.activeElement===b){e.preventDefault();a.focus()}
+  }
+  function prikker(){
+    if(TRIN.length<2) return '<span></span>';
+    return '<div class="steps" aria-hidden="true">'+TRIN.map(function(_,i){return '<i class="'+(i<=M.trin?'on':'')+'"></i>'}).join('')+'</div>';
+  }
+  function naeste(){
+    if(M.trin<TRIN.length-1){M.trin++;tegnTrin()}
+    else luk();
+  }
+
+  function tegnTrin(){
+    var box=document.querySelector('#ovl .modal'); if(!box) return;
+    var t=TRIN[M.trin], h='';
+    h+='<div class="mtop"><span class="pill">'+(TRIN.length>1?('Spørgsmål '+(M.trin+1)+' af '+TRIN.length):'Sidste trin')+'</span>'
+      +'<button class="xbtn" id="x" aria-label="Luk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>';
+
+    if(t==='aarsvaerk'){
+      if(!M.ret){
+        h+='<h3 id="mh" class="midt">Passer antal årsværk?</h3>'
+          +'<div class="talblok"><div class="talnum">'+dec(A.aarsvaerkCvr)+'</div>'
+          +'<div class="talenh">årsværk</div>'
+          +'<div class="talkilde">ifølge CVR · '+esc(A.periode)+'</div></div>'
+          +'<div class="mvalg"><button class="btn stor block" id="ja">Ja, det passer</button>'
+          +'<button class="btn quiet block" id="ret">Nej, ret tallet</button></div>';
+      } else {
+        h+='<h3 id="mh" class="midt">Hvor mange årsværk er I?</h3>'
+          +'<p class="mlead midt">Én person på fuld tid i et helt år er ét årsværk.</p>'
+          +'<div class="mfield"><input type="text" id="av" inputmode="decimal" class="stortal" '
+          +'value="'+esc(String(A.aarsvaerk).replace('.',','))+'" aria-label="Antal årsværk"></div>'
+          +'<p class="err" id="averr"></p>'
+          +'<div class="mvalg"><button class="btn stor block" id="gem">Se prisen</button></div>';
+      }
+    }
+    box.innerHTML=h;
+    document.getElementById('x').onclick=luk;
+    var tb=document.getElementById('tilbage'); if(tb) tb.onclick=function(){M.trin--;tegnTrin()};
+
+    if(t==='aarsvaerk'){
+      if(!M.ret){
+        var ja=document.getElementById('ja');
+        ja.focus({preventScroll:true});
+        ja.onclick=function(){
+          A.aarsvaerk=String(A.aarsvaerkCvr); A.bekraeftet=true; opdater(); naeste();
+        };
+        document.getElementById('ret').onclick=function(){M.ret=true;tegnTrin()};
+      } else {
+        var av=document.getElementById('av');
+        av.focus({preventScroll:true}); av.select();
+        function gem(){
+          var n=parseFloat(av.value.replace(',','.').replace(/[^\d.]/g,''));
+          var e=document.getElementById('averr');
+          if(!n||n<=0){e.textContent='Skriv et tal, for eksempel 4,2.';av.focus();return}
+          A.aarsvaerk=String(n); A.bekraeftet=true; M.ret=false; opdater(); naeste();
+        }
+        av.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();gem()}};
+        document.getElementById('gem').onclick=gem;
+      }
+    }
+  }
+
+  function svar(){
+    var box=document.getElementById('svar'); if(!box) return;
+    if(!A.bekraeftet){box.innerHTML='';return}
+    var g=branche(A.branche);
+    var h='<div class="svar"><div class="sh2"><b>Jeres svar</b><button class="btn quiet small" id="ret">Ret svar</button></div>'
+      +'<div class="r"><b>Årsværk</b><span>'+dec(Number(A.aarsvaerk))+' · bekræftet</span></div>'
+      +'<div class="r"><b>Prisgruppe</b><span>'+esc(g?g[1]:'')+'</span></div>'
+
+      +'</div>';
+    box.innerHTML=h;
+    document.getElementById('ret').onclick=function(){aabn(0)};
+  }
+
+  function firma(){
+    var box=document.getElementById('firma'); if(!box) return;
+    var g=branche(A.branche);
+    var h='<div class="found"><div class="fh"><b class="n">'+esc(A.navn)+'</b><span class="tagx">Eksempeldata</span></div>'
+      +'<div class="kv">'
+      +'<div class="r"><b>CVR-nummer</b><span class="code">'+esc(A.cvr)+'</span></div>'
+      +'<div class="r"><b>Branchekode</b><span class="code">'+esc(A.kode)+'</span></div>'
+      +'<div class="r"><b>Branche</b><span>'+esc(A.kodetekst)+'</span></div>'
+      +'<div class="r"><b>Årsværk, senest opdateret</b><span>'+dec(A.aarsvaerkCvr)+' ('+esc(A.periode)+')</span></div>'
+      +'</div></div>';
+
+    if(!A.bekraeftet){
+      h+='<div class="confirm"><p class="q">Bekræft antal årsværk for at se prisen</p>'
+        +'<p class="s">Vi mangler to hurtige svar, før vi kan regne.</p>'
+        +'<button class="btn" id="aabnm">Besvar spørgsmålene</button></div>';
+    }
+
+    h+='<label class="f" style="margin-top:20px" for="br">Prisgruppe ud fra branchekoden</label>'
+      +'<select id="br">'+BRANCHER.map(function(b){return '<option value="'+b[0]+'"'+(A.branche===b[0]?' selected':'')+'>'+esc(b[1])+'</option>'}).join('')+'</select>'
+      +'<p class="help">Udfyldt ud fra branchekode '+esc(A.kode)+'. Ret den, hvis arbejdet i praksis ser anderledes ud end koden.</p>';
+
+    box.innerHTML=h;
+    document.getElementById('br').onchange=function(){A.branche=this.value;opdater();svar()};
+    var ab=document.getElementById('aabnm'); if(ab) ab.onclick=function(){aabn(0)};
+  }
+
+  function panel(){
+    var el=document.getElementById('panel'); if(!el) return;
+    var p=beregn(), pill=document.getElementById('pill');
+    if(pill) pill.textContent = p ? 'Klar · Estimat beregnet' : (A.navn?'2 af 2 · Spørgsmål':'1 af 2 · Virksomhed');
+
+    var h='<h2>Sådan er prisen regnet ud</h2>';
+    if(!p){
+      h+='<p class="intro">Når I har svaret på de to spørgsmål, viser vi her, hvordan beløbet fordeler sig.</p>';
+    } else {
+      h+='<p class="intro">'+esc(p.navn)+' · '+dec(p.ans)+' årsværk</p>'
+        +'<div class="breakdown">'
+        +'<div class="ln"><b>Arbejdsulykker</b><span>'+kr(p.ulykke)+'</span></div>'
+        +'<div class="ln"><b>AES-bidrag, '+dec(p.ans)+' årsværk</b><span>'+kr(p.aes)+'</span></div>'
+        +'<div class="ln tot"><b>Midtpunkt pr. år</b><span>'+kr(p.total)+'</span></div></div>';
+    }
+    h+='<ul class="ticks">'
+      +'<li>'+tick+'<span>Branchekode hentet fra virksomhedens CVR</span></li>'
+      +'<li>'+tick+'<span>Årsværk hentet fra CVR og bekræftet af jer</span></li>'
+      +'<li>'+tick+'<span>Ingen betaling eller binding for at se estimatet</span></li></ul>'
+      +'<div class="privacy">'+lock+'<span><b>Dine oplysninger bruges kun til beregningen.</b> Intet deles med et forsikringsselskab, før du selv siger ja.</span></div>';
+    if(p) h+='<p class="note">Estimatet er vejledende. Den endelige præmie fastsættes af forsikringsselskabet og reguleres efter årets faktiske antal årsværk.</p>';
+    el.innerHTML=h;
+  }
+
+  /* ---------- modtagere ---------- */
+  // Status: "aftale" = aftale på plads, "afventer" = ikke aftale endnu.
+  // Skal verificeres mod Finanstilsynets virksomhedsregister før lancering.
+  var SELSKABER=[
+    ['tryg','Tryg','afventer'],
+    ['topdanmark','Topdanmark','afventer'],
+    ['if','If Erhverv','afventer'],
+    ['almbrand','Alm. Brand','afventer'],
+    ['gjensidige','Gjensidige','afventer'],
+    ['protector','Protector Forsikring','afventer'],
+    ['kf','Købstædernes Forsikring','afventer'],
+    ['gf','GF Forsikring','afventer'],
+    ['thisted','Thisted Forsikring','afventer']
+  ];
+  var MAEGLERE=[
+    ['wtw','WTW (Willis Towers Watson)','afventer'],
+    ['marsh','Marsh','afventer'],
+    ['aon','Aon','afventer'],
+    ['howden','Howden (tidligere NORTH)','afventer'],
+    ['soderberg','Söderberg & Partners','afventer'],
+    ['contea','Contea Assurance','afventer'],
+    ['rtm','RTM Forsikringsmæglere','afventer']
+  ];
+  var VALGT={};
+  var FORVALGT=false;
+  function forvaelg(){
+    if(FORVALGT) return;
+    SELSKABER.forEach(function(x){VALGT[x[0]]=true});
+    FORVALGT=true;
+  }
+  function valgteAntal(){var n=0;Object.keys(VALGT).forEach(function(k){if(VALGT[k])n++});return n}
+
+  function liste(id,arr,titel,undertekst){
+    var alle=arr.every(function(x){return VALGT[x[0]]});
+    var h='<div class="mgruppe"><div class="mghead"><div><b>'+esc(titel)+'</b><span>'+esc(undertekst)+'</span></div>'
+      +'<button class="btn quiet small" data-alle="'+id+'">'+(alle?'Fravælg alle':'Vælg alle')+'</button></div>'
+      +'<div class="mliste">';
+    arr.forEach(function(x){
+      var on=!!VALGT[x[0]];
+      h+='<button class="mrow" data-m="'+x[0]+'" aria-pressed="'+on+'">'
+        +'<span class="box"></span><span class="mnavn">'+esc(x[1])+'</span>'
+        +'<span class="mstatus '+x[2]+'">'+(x[2]==='aftale'?'Aftale':'Afventer aftale')+'</span></button>';
+    });
+    return h+'</div></div>';
+  }
+
+  /* ---------- forespørgsel som popup ---------- */
+  var F={trin:0,vaelgSelv:false,sidstFokus:null};
+  var FTRIN=['modtagere','kontakt','samtykke'];
+
+  function tegn(){
+    forvaelg();
+    F.trin=0; F.vaelgSelv=false; F.sidstFokus=document.activeElement;
+    document.body.classList.add('locked');
+    var o=document.createElement('div');
+    o.className='ovl'; o.id='fovl';
+    o.innerHTML='<div class="modal" role="dialog" aria-modal="true" aria-labelledby="fh"></div>';
+    document.body.appendChild(o);
+    o.addEventListener('mousedown',function(e){if(e.target===o)fLuk()});
+    document.addEventListener('keydown',fTast);
+    fTegn();
+  }
+  function fLuk(){
+    var o=document.getElementById('fovl'); if(o) o.remove();
+    document.body.classList.remove('locked');
+    document.removeEventListener('keydown',fTast);
+    if(F.sidstFokus&&F.sidstFokus.focus&&document.contains(F.sidstFokus)) F.sidstFokus.focus({preventScroll:true});
+  }
+  function fTast(e){
+    if(!document.getElementById('fovl')) return;
+    if(e.key==='Escape'){e.preventDefault();fLuk();return}
+    if(e.key!=='Tab') return;
+    var f=document.querySelectorAll('#fovl button, #fovl input');
+    if(!f.length) return;
+    var a=f[0], b=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===a){e.preventDefault();b.focus()}
+    else if(!e.shiftKey&&document.activeElement===b){e.preventDefault();a.focus()}
+  }
+  function felt(id,label,type,ac,ph,vaerdi,ikon){
+    return '<div class="felt'+(vaerdi?' udfyldt':'')+'" data-felt="'+id+'">'
+      +'<label for="'+id+'">'+esc(label)+'</label>'
+      +'<div class="fwrap">'
+      +'<svg class="fikon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+ikon+'</svg>'
+      +'<input type="'+type+'" id="'+id+'" autocomplete="'+ac+'" placeholder="'+esc(ph)+'" value="'+esc(vaerdi||'')+'"'
+      + (type==='email'?' inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false"':'')
+      + (type==='tel'?' inputmode="tel"':'')
+      + (type==='text'?' autocapitalize="words"':'')
+      +' enterkeyhint="next">'
+      +'<svg class="fok" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>'
+      +'</div></div>';
+  }
+
+  function fPrikker(){
+    return '<div class="steps" aria-hidden="true">'+FTRIN.map(function(_,i){
+      return '<i class="'+(i<=F.trin?'on':'')+'"></i>'}).join('')+'</div>';
+  }
+
+  function fTegn(){
+    var box=document.querySelector('#fovl .modal'); if(!box) return;
+    var t=FTRIN[F.trin], h='';
+    h+='<div class="mtop"><span class="pill">Trin '+(F.trin+1)+' af '+FTRIN.length+'</span>'
+      +'<button class="xbtn" id="fx" aria-label="Luk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>';
+
+    if(t==='modtagere'){
+      if(!F.vaelgSelv){
+        h+='<h3 id="fh">Send til alle selskaber?</h3>'
+          +'<p class="mlead">Vi sender jeres oplysninger til '+SELSKABER.length+' forsikringsselskaber, så I kan sammenligne priserne ét sted.</p>'
+          +'<div class="mvalg"><button class="btn stor block" id="alle">Ja, send til alle</button>'
+          +'<button class="btn quiet block" id="selv">Jeg vælger selv</button></div>';
+      } else {
+        h+='<h3 id="fh">Hvem skal give tilbud?</h3>'
+          +'<p class="mlead"><span id="antaltxt">'+valgteAntal()+'</span> valgt</p>'
+          +'<div class="mscroll" id="modtagere"></div>'
+          +'<p class="err" id="merr"></p>'
+          +'<div class="mvalg"><button class="btn stor block" id="videref">Fortsæt</button></div>';
+      }
+    }
+
+    if(t==='kontakt'){
+      h+='<h3 id="fh">Hvor skal tilbuddene sendes hen?</h3>'
+        +'<p class="mlead">Selskaberne kontakter jer direkte på de oplysninger her.</p>'
+        +'<div class="felter">'
+        + felt('kn','Navn','text','name','Fornavn Efternavn',A.kontaktNavn,
+               '<path d="M10 10a3.2 3.2 0 1 0 0-6.4A3.2 3.2 0 0 0 10 10z"/><path d="M3.5 17c0-3.1 2.9-5.3 6.5-5.3s6.5 2.2 6.5 5.3"/>')
+        + felt('kt','Telefon','tel','tel','12 34 56 78',A.kontaktTlf,
+               '<path d="M6.8 3.5 8.4 7 6.9 8.6c.9 1.9 2.6 3.6 4.5 4.5L13 11.6l3.5 1.6v3c0 .6-.5 1.1-1.1 1C8.6 16.6 3.4 11.4 2.9 4.6c0-.6.4-1.1 1-1.1h2.9z"/>')
+        + felt('ke','E-mail','email','email','navn@firma.dk',A.kontaktMail,
+               '<rect x="2.5" y="4.5" width="15" height="11" rx="2"/><path d="m3 6 7 5 7-5"/>')
+        +'</div>'
+        +'<p class="err" id="kerr"></p>'
+        +'<div class="mact">'+fPrikker()+'<div style="display:flex;gap:10px">'
+        +'<button class="btn quiet" id="ftilbage">Tilbage</button>'
+        +'<button class="btn" id="videref">Fortsæt</button></div></div>';
+    }
+
+    if(t==='samtykke'){
+      h+='<h3 id="fh">Sidste trin: jeres samtykke</h3>'
+        +'<p class="mlead">Begge dele er nødvendige, for at selskaberne kan give jer en rigtig pris.</p>'
+        +'<label class="consent big"><input type="checkbox" id="s1"><span>Jeg giver samtykke til, at mine oplysninger sendes til de valgte selskaber, og at de må kontakte mig med et tilbud.</span></label>'
+        +'<label class="consent big"><input type="checkbox" id="s2"><span>Jeg giver samtykke til, at selskaberne må indhente virksomhedens skadesoplysninger.</span></label>'
+        +'<p class="err" id="serr"></p>'
+        +'<div class="mact">'+fPrikker()+'<div style="display:flex;gap:10px">'
+        +'<button class="btn quiet" id="ftilbage">Tilbage</button>'
+        +'<button class="btn" id="fsend">Send forespørgsel</button></div></div>';
+    }
+
+    box.innerHTML=h;
+    document.getElementById('fx').onclick=fLuk;
+    var tb=document.getElementById('ftilbage');
+    if(tb) tb.onclick=function(){F.trin--;fTegn()};
+
+    if(t==='modtagere'&&!F.vaelgSelv){
+      var al=document.getElementById('alle');
+      al.focus({preventScroll:true});
+      al.onclick=function(){
+        SELSKABER.forEach(function(x){VALGT[x[0]]=true});
+        MAEGLERE.forEach(function(x){VALGT[x[0]]=false});
+        F.trin=1; fTegn();
+      };
+      document.getElementById('selv').onclick=function(){F.vaelgSelv=true;fTegn()};
+    }
+    if(t==='modtagere'&&F.vaelgSelv){
+      fModtagere();
+      document.getElementById('videref').onclick=function(){
+        if(valgteAntal()===0){document.getElementById('merr').textContent='Vælg mindst én modtager.';return}
+        F.trin=1; fTegn();
+      };
+    }
+    if(t==='kontakt'){
+      var kn=document.getElementById('kn'), kt=document.getElementById('kt'), ke=document.getElementById('ke');
+      var raek=[kn,kt,ke];
+      function gyldigFelt(el){
+        if(el===ke) return /^\S+@\S+\.\S+$/.test(el.value.trim());
+        if(el===kt) return el.value.replace(/\D/g,'').length>=8;
+        return el.value.trim().length>1;
+      }
+      function marker(el){
+        var f=el.closest('.felt');
+        f.classList.toggle('udfyldt', gyldigFelt(el));
+      }
+      raek.forEach(function(el,i){
+        el.oninput=function(){
+          if(el===kt){
+            var r=el.value.replace(/\D/g,'').slice(0,8);
+            el.value=r.replace(/(\d{2})(?=\d)/g,'$1 ').trim();
+          }
+          marker(el);
+          if(document.getElementById('kerr').textContent) document.getElementById('kerr').textContent='';
+        };
+        el.onblur=function(){marker(el)};
+        el.onkeydown=function(e){
+          if(e.key!=='Enter') return;
+          e.preventDefault();
+          if(i<raek.length-1) raek[i+1].focus();
+          else document.getElementById('videref').click();
+        };
+        marker(el);
+      });
+      ke.setAttribute('enterkeyhint','go');
+      kn.focus({preventScroll:true});
+      document.getElementById('videref').onclick=function(){
+        var e=document.getElementById('kerr');
+        A.kontaktNavn=kn.value.trim();
+        A.kontaktTlf=document.getElementById('kt').value.trim();
+        A.kontaktMail=document.getElementById('ke').value.trim();
+        if(!A.kontaktNavn){e.textContent='Skriv dit navn.';kn.focus();return}
+        if(!/^\S+@\S+\.\S+$/.test(A.kontaktMail)){e.textContent='Skriv en gyldig e-mail.';document.getElementById('ke').focus();return}
+        F.trin=2; fTegn();
+      };
+    }
+    if(t==='samtykke'){
+      document.getElementById('s1').focus({preventScroll:true});
+      document.getElementById('fsend').onclick=function(){
+        var e=document.getElementById('serr');
+        if(!document.getElementById('s1').checked||!document.getElementById('s2').checked){
+          e.textContent='Sæt begge flueben for at sende forespørgslen.';return;
+        }
+        var valgt=SELSKABER.concat(MAEGLERE).filter(function(x){return VALGT[x[0]]});
+        TILBUD={};
+        valgt.forEach(function(x){TILBUD[x[0]]={navn:x[1],status:'afventer'}});
+        A.sendt=true; A.linkSendt=true;
+        fLuk(); oversigt(); window.scrollTo(0,0);
+      };
+    }
+  }
+
+  function fModtagere(){
+    var box=document.getElementById('modtagere'); if(!box) return;
+    box.innerHTML=liste('selskaber',SELSKABER,'Forsikringsselskaber','Giver tilbud på deres eget produkt.')
+      + liste('maeglere',MAEGLERE,'Forsikringsmæglere','Indhenter tilbud fra flere selskaber for jer.');
+    var tx=document.getElementById('antaltxt'); if(tx) tx.textContent=valgteAntal();
+    box.querySelectorAll('[data-m]').forEach(function(b){
+      b.onclick=function(){VALGT[b.getAttribute('data-m')]=!VALGT[b.getAttribute('data-m')];fModtagere()};
+    });
+    box.querySelectorAll('[data-alle]').forEach(function(b){
+      b.onclick=function(){
+        var arr=b.getAttribute('data-alle')==='selskaber'?SELSKABER:MAEGLERE;
+        var alle=arr.every(function(x){return VALGT[x[0]]});
+        arr.forEach(function(x){VALGT[x[0]]=!alle});
+        fModtagere();
+      };
+    });
+  }
+
+
+  /* ---------- selskabets svarside ---------- */
+  var BINDING=['Ingen binding ud over forsikringsåret','12 måneder','24 måneder','36 måneder'];
+
+  function svarside(key){
+    var t=TILBUD[key]; if(!t) return;
+    var p=beregn();
+    var sagsid='AS-'+(A.cvr||'00000000').slice(-4)+'-'+String(Math.abs(hashKode(key))).slice(0,4);
+    var omdage=new Date(Date.now()+14*86400000).toISOString().slice(0,10);
+
+    app.innerHTML='<section class="selskabtop"><div class="c">'
+      +'<p class="stoplabel">Forespørgsel via beregnarbejdsskade.dk</p>'
+      +'<h1>Arbejdsskadeforsikring til '+esc(A.navn||'')+'</h1>'
+      +'<p class="smeta">Til <b>'+esc(t.navn)+'</b> · sag '+esc(sagsid)+' · svar udbedes inden 1 hverdag</p>'
+      +'</div></section>'
+      +'<div class="c"><div class="grid"><div>'
+      +'<div class="card"><div class="chead"><h2>Jeres svar</h2><span class="pill">Udfyld felterne</span></div>'
+      +'<p class="help" style="margin:-10px 0 20px">Tallene herunder vises direkte i kundens overblik. Skriv dem i felterne, så de kan sammenlignes med de øvrige tilbud.</p>'
+      +'<div class="mvalg" style="margin-top:0"><div class="radios" role="group" aria-label="Kan I give tilbud">'
+      +'<button data-sv="ja" aria-pressed="true">Vi giver tilbud</button>'
+      +'<button data-sv="nej" aria-pressed="false">Vi giver ikke tilbud</button></div></div>'
+      +'<div id="svarfelter"></div>'
+      +'<p class="err" id="sverr"></p>'
+      +'<div class="actions"><button class="btn quiet" id="svtilbage">Tilbage</button>'
+      +'<button class="btn" id="svsend">Send svar til kunden</button></div></div></div>'
+      +'<div><div class="side"><div class="panel">'
+      +'<h2>Oplysninger om virksomheden</h2>'
+      +'<div class="breakdown" style="margin-top:18px">'
+      +'<div class="ln"><b>Virksomhed</b><span>'+esc(A.navn||'')+'</span></div>'
+      +'<div class="ln"><b>CVR</b><span class="code">'+esc(A.cvr||'')+'</span></div>'
+      +'<div class="ln"><b>Branchekode</b><span class="code">'+esc(A.kode||'')+'</span></div>'
+      +'<div class="ln"><b>Branche</b><span>'+esc(A.kodetekst||'')+'</span></div>'
+      +'<div class="ln"><b>Årsværk</b><span>'+dec(p?p.ans:Number(A.aarsvaerk||0))+'</span></div>'
+      +'<div class="ln"><b>Ønsket startdato</b><span>'+esc(A.start||'snarest')+'</span></div>'
+      +'<div class="ln"><b>Samtykke til skadesoplysninger</b><span>Ja</span></div>'
+      +'</div>'
+      +'<button class="btn quiet block" id="kopier" style="margin-top:18px">Kopiér oplysningerne</button>'
+      +'<p class="note">Kunden har givet samtykke til, at I må kontakte dem og indhente virksomhedens skadesoplysninger.</p>'
+      +'</div></div></div></div></div>';
+
+    var svar={type:'ja'};
+    function tegnFelter(){
+      var b=document.getElementById('svarfelter');
+      if(svar.type==='nej'){
+        b.innerHTML='<div class="felter">'
+          + felt('sgrund','Kort begrundelse til kunden','text','off','Fx: Vi tegner ikke denne branche.','',
+                 '<circle cx="10" cy="10" r="7.5"/><path d="M10 6.5v4.5M10 13.2v.3"/>')
+          +'</div>';
+        return;
+      }
+      b.innerHTML='<div class="felter">'
+        + felt('spris','Samlet årlig præmie i kroner','text','off','fx 24500','',
+               '<path d="M12.5 5.5H9a2.5 2.5 0 0 0 0 5h2a2.5 2.5 0 0 1 0 5H7.5M10 3.5v13"/>')
+        +'</div>'
+        +'<div class="felter" style="margin-top:14px">'
+        +'<div class="felt"><label for="saes">Er AES-bidraget med i prisen?</label>'
+        +'<div class="radios" role="group" aria-label="AES"><button data-aes="ja" aria-pressed="true">Ja</button>'
+        +'<button data-aes="nej" aria-pressed="false">Nej</button></div></div>'
+        +'<div class="felt"><label for="sbind">Bindingsperiode</label>'
+        +'<select id="sbind">'+BINDING.map(function(x){return '<option>'+esc(x)+'</option>'}).join('')+'</select></div>'
+        +'<div class="felt"><label for="sgyld">Tilbuddet gælder til</label>'
+        +'<input type="date" id="sgyld" value="'+omdage+'"></div>'
+        +'<div class="felt"><label for="sbem">Forbehold eller bemærkninger (valgfrit)</label>'
+        +'<input type="text" id="sbem" placeholder="Fx: Forudsat ren skadehistorik"></div>'
+        +'</div>';
+      var pris=document.getElementById('spris');
+      pris.oninput=function(){
+        var r=pris.value.replace(/\D/g,'').slice(0,8);
+        pris.value = r ? new Intl.NumberFormat('da-DK').format(Number(r)) : '';
+        pris.closest('.felt').classList.toggle('udfyldt', Number(r)>0);
+        document.getElementById('sverr').textContent='';
+      };
+      document.querySelectorAll('[data-aes]').forEach(function(x){
+        x.onclick=function(){
+          svar.aes=x.getAttribute('data-aes');
+          document.querySelectorAll('[data-aes]').forEach(function(y){y.setAttribute('aria-pressed',y===x)});
+        };
+      });
+      svar.aes=svar.aes||'ja';
+      pris.focus({preventScroll:true});
+    }
+    tegnFelter();
+
+    document.querySelectorAll('[data-sv]').forEach(function(x){
+      x.onclick=function(){
+        svar.type=x.getAttribute('data-sv');
+        document.querySelectorAll('[data-sv]').forEach(function(y){y.setAttribute('aria-pressed',y===x)});
+        document.getElementById('sverr').textContent='';
+        tegnFelter();
+      };
+    });
+
+    document.getElementById('kopier').onclick=function(){
+      var tekst='CVR: '+(A.cvr||'')+'\nVirksomhed: '+(A.navn||'')+'\nBranchekode: '+(A.kode||'')
+        +'\nÅrsværk: '+dec(Number(A.aarsvaerk||0))+'\nStartdato: '+(A.start||'snarest')+'\nSag: '+sagsid;
+      if(navigator.clipboard) navigator.clipboard.writeText(tekst);
+      this.textContent='Kopieret';
+      var b=this; setTimeout(function(){b.textContent='Kopiér oplysningerne'},1600);
+    };
+    document.getElementById('svtilbage').onclick=function(){oversigt();window.scrollTo(0,0)};
+
+    document.getElementById('svsend').onclick=function(){
+      var e=document.getElementById('sverr');
+      if(svar.type==='nej'){
+        t.status='afvist';
+        t.grund=document.getElementById('sgrund').value.trim()||'Giver ikke tilbud på denne opgave.';
+        kvitSelskab(t,sagsid); return;
+      }
+      var n=Number((document.getElementById('spris').value||'').replace(/\D/g,''));
+      if(!n||n<500){e.textContent='Skriv den samlede årlige præmie i kroner.';document.getElementById('spris').focus();return}
+      t.status='modtaget';
+      t.pris=n;
+      t.aesMed=svar.aes==='ja';
+      t.bindingsperiode=document.getElementById('sbind').value;
+      t.gyldigTil=document.getElementById('sgyld').value;
+      t.bemaerkning=document.getElementById('sbem').value.trim();
+      t.svartid='netop nu';
+      kvitSelskab(t,sagsid);
+    };
+  }
+
+  function kvitSelskab(t,sagsid){
+    var card=document.querySelector('.card');
+    card.innerHTML='<div class="chead"><h2 tabindex="-1">Svaret er registreret</h2></div>'
+      +'<div class="done">'+(t.status==='modtaget'
+        ? 'Prisen på '+kr(t.pris)+' om året er nu synlig i kundens overblik sammen med de øvrige tilbud.'
+        : 'Vi har noteret, at I ikke giver tilbud på denne opgave. Kunden får besked.')
+      +' Dette er en prototype, så intet er sendt eller gemt.</div>'
+      +'<p class="help" style="margin-top:14px">Sag '+esc(sagsid)+'. Vælger kunden jer, sender vi deres oplysninger, og I overtager dialogen.</p>'
+      +'<div class="actions"><span></span><button class="btn" id="tilkunde">Se kundens overblik</button></div>';
+    card.querySelector('h2').focus();
+    document.getElementById('tilkunde').onclick=function(){oversigt();window.scrollTo(0,0)};
+  }
+
+  function hashKode(k){var h=0;for(var i=0;i<k.length;i++){h=(h*31+k.charCodeAt(i))|0}return h}
+
+  /* ---------- adgang til eget overblik ---------- */
+  var L={mail:'',kode:'',forsoeg:0,nedtaelling:0,timer:null};
+
+  function adgang(){
+    L={mail:A.kontaktMail||'',kode:'',forsoeg:0,nedtaelling:0,timer:null};
+    L.sidstFokus=document.activeElement;
+    document.body.classList.add('locked');
+    var o=document.createElement('div');
+    o.className='ovl'; o.id='lovl';
+    o.innerHTML='<div class="modal" role="dialog" aria-modal="true" aria-labelledby="lh"></div>';
+    document.body.appendChild(o);
+    o.addEventListener('mousedown',function(e){if(e.target===o)lLuk()});
+    document.addEventListener('keydown',lTast);
+    lTegn('mail');
+  }
+  function lLuk(){
+    if(L.timer){clearInterval(L.timer);L.timer=null}
+    var o=document.getElementById('lovl'); if(o) o.remove();
+    document.body.classList.remove('locked');
+    document.removeEventListener('keydown',lTast);
+    if(L.sidstFokus&&L.sidstFokus.focus&&document.contains(L.sidstFokus)) L.sidstFokus.focus({preventScroll:true});
+  }
+  function lTast(e){
+    if(!document.getElementById('lovl')) return;
+    if(e.key==='Escape'){e.preventDefault();lLuk()}
+  }
+
+  function lTegn(trin){
+    var box=document.querySelector('#lovl .modal'); if(!box) return;
+    var h='<div class="mtop"><span class="pill">Log ind</span>'
+      +'<button class="xbtn" id="lx" aria-label="Luk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>';
+
+    if(trin==='mail'){
+      h+='<h3 id="lh" class="midt">Se jeres tilbud</h3>'
+        +'<p class="mlead midt">Skriv den e-mail, I brugte til forespørgslen. Vi sender en kode. Ingen adgangskode at huske.</p>'
+        +'<div class="felter">'
+        + felt('lmail','E-mail','email','email','navn@firma.dk',L.mail,
+               '<rect x="2.5" y="4.5" width="15" height="11" rx="2"/><path d="m3 6 7 5 7-5"/>')
+        +'</div>'
+        +'<p class="err" id="lerr"></p>'
+        +'<div class="mvalg"><button class="btn stor block" id="lsend">Send mig en kode</button></div>';
+    }
+
+    if(trin==='kode'){
+      h+='<h3 id="lh" class="midt">Skriv koden</h3>'
+        +'<p class="mlead midt">Vi har sendt en 6-cifret kode til<br><b>'+esc(L.mail)+'</b></p>'
+        +'<div class="kodefelt" id="kodefelt">'
+        + [0,1,2,3,4,5].map(function(i){
+            return '<input type="text" inputmode="numeric" maxlength="1" autocomplete="'+(i===0?'one-time-code':'off')+'" aria-label="Ciffer '+(i+1)+'" data-i="'+i+'">';
+          }).join('')
+        +'</div>'
+        +'<p class="err midt" id="lerr"></p>'
+        +'<p class="kodehint midt">Prototype: koden er <b>'+esc(L.kode)+'</b></p>'
+        +'<p class="mlead midt" style="margin-top:18px;font-size:15px">Ikke modtaget noget? '
+        +'<button class="linkbtn" id="igen"'+(L.nedtaelling?' disabled':'')+'>'
+        +(L.nedtaelling?('Send igen om '+L.nedtaelling+' s'):'Send koden igen')+'</button></p>'
+        +'<div class="mvalg"><button class="btn quiet block" id="andenmail">Brug en anden e-mail</button></div>';
+    }
+
+    box.innerHTML=h;
+    document.getElementById('lx').onclick=lLuk;
+
+    if(trin==='mail'){
+      var m=document.getElementById('lmail');
+      m.focus({preventScroll:true});
+      function send(){
+        var v=m.value.trim();
+        if(!/^\S+@\S+\.\S+$/.test(v)){document.getElementById('lerr').textContent='Skriv en gyldig e-mail.';m.focus();return}
+        L.mail=v;
+        L.kode=String(Math.floor(100000+Math.random()*900000));
+        L.forsoeg=0;
+        lTegn('kode');
+        startNedtaelling();
+      }
+      m.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();send()}};
+      m.oninput=function(){
+        m.closest('.felt').classList.toggle('udfyldt',/^\S+@\S+\.\S+$/.test(m.value.trim()));
+        document.getElementById('lerr').textContent='';
+      };
+      m.oninput();
+      document.getElementById('lsend').onclick=send;
+    }
+
+    if(trin==='kode'){
+      var felter=[].slice.call(document.querySelectorAll('#kodefelt input'));
+      felter[0].focus({preventScroll:true});
+      felter.forEach(function(f,i){
+        f.oninput=function(){
+          var v=f.value.replace(/\D/g,'');
+          if(v.length>1){ fordel(v,i); return; }
+          f.value=v;
+          document.getElementById('lerr').textContent='';
+          if(v&&i<5) felter[i+1].focus();
+          tjek();
+        };
+        f.onkeydown=function(e){
+          if(e.key==='Backspace'&&!f.value&&i>0){felter[i-1].focus();felter[i-1].value='';e.preventDefault()}
+          if(e.key==='ArrowLeft'&&i>0){felter[i-1].focus();e.preventDefault()}
+          if(e.key==='ArrowRight'&&i<5){felter[i+1].focus();e.preventDefault()}
+        };
+        f.onpaste=function(e){
+          e.preventDefault();
+          fordel((e.clipboardData.getData('text')||'').replace(/\D/g,''),0);
+        };
+      });
+      function fordel(tekst,fra){
+        for(var j=0;j+fra<6&&j<tekst.length;j++) felter[fra+j].value=tekst[j];
+        var naeste=Math.min(fra+tekst.length,5);
+        felter[naeste].focus();
+        tjek();
+      }
+      function tjek(){
+        var ind=felter.map(function(f){return f.value}).join('');
+        if(ind.length<6) return;
+        if(ind===L.kode){ lLuk(); efterLogin(); return; }
+        L.forsoeg++;
+        document.getElementById('lerr').textContent = L.forsoeg>=3
+          ? 'Koden passer ikke. Bed om en ny kode.' : 'Koden passer ikke. Prøv igen.';
+        felter.forEach(function(f){f.value=''});
+        felter[0].focus();
+        document.getElementById('kodefelt').classList.add('ryst');
+        setTimeout(function(){var k=document.getElementById('kodefelt');if(k)k.classList.remove('ryst')},400);
+      }
+      var ig=document.getElementById('igen');
+      ig.onclick=function(){
+        if(L.nedtaelling) return;
+        L.kode=String(Math.floor(100000+Math.random()*900000));
+        L.forsoeg=0;
+        lTegn('kode'); startNedtaelling();
+      };
+      document.getElementById('andenmail').onclick=function(){
+        if(L.timer){clearInterval(L.timer);L.timer=null}
+        L.nedtaelling=0; lTegn('mail');
+      };
+    }
+  }
+
+  function startNedtaelling(){
+    if(L.timer) clearInterval(L.timer);
+    L.nedtaelling=30;
+    L.timer=setInterval(function(){
+      L.nedtaelling--;
+      var b=document.getElementById('igen');
+      if(!b){clearInterval(L.timer);L.timer=null;return}
+      if(L.nedtaelling<=0){
+        clearInterval(L.timer); L.timer=null;
+        b.disabled=false; b.textContent='Send koden igen';
+      } else {
+        b.disabled=true; b.textContent='Send igen om '+L.nedtaelling+' s';
+      }
+    },1000);
+  }
+
+  // efter login: vis sagen. Findes der ingen i denne session, laves en demosag.
+  function efterLogin(){
+    A.kontaktMail=L.mail;
+    if(!Object.keys(TILBUD).length){
+      A.navn=A.navn||'Eksempelvirksomhed ApS';
+      A.cvr=A.cvr||'12345678';
+      A.kode=A.kode||'43.32.00';
+      A.kodetekst=A.kodetekst||'Tømrer- og bygningssnedkerarbejde';
+      A.branche=A.branche||'haandvaerk';
+      A.aarsvaerk=A.aarsvaerk||'4.2';
+      A.aarsvaerkCvr=A.aarsvaerkCvr||4.2;
+      A.periode=A.periode||'2. kvartal 2026';
+      A.bekraeftet=true; A.sendt=true; A.linkSendt=true;
+      forvaelg();
+      SELSKABER.forEach(function(x){TILBUD[x[0]]={navn:x[1],status:'afventer'}});
+      simulerSvar();
+      return;
+    }
+    oversigt(); window.scrollTo(0,0);
+  }
+
+  /* ---------- kundens overblik over tilbud ---------- */
+  var TILBUD={};
+
+  // Prototypesvar: simulerer at selskaberne svarer med en pris.
+  function simulerSvar(){
+    var p=beregn(); if(!p) return;
+    var i=0;
+    Object.keys(TILBUD).forEach(function(k){
+      var t=TILBUD[k];
+      if(t.status!=='afventer') return;
+      i++;
+      if(i%5===0){ t.status='afvist'; t.grund='Tegner ikke denne branche lige nu.'; return; }
+      var spredning=[-0.14,-0.06,0.03,0.11,-0.19,0.07,0.17,-0.02][i%8];
+      t.status='modtaget';
+      t.pris=Math.round(p.total*(1+spredning)/100)*100;
+      t.bindingsperiode=i%3===0?'12 måneder':'Ingen binding ud over forsikringsåret';
+      t.svartid=i+' timer siden';
+    });
+    oversigt();
+  }
+
+  function tilbudsListe(){
+    return Object.keys(TILBUD).map(function(k){var t=TILBUD[k];t.key=k;return t})
+      .sort(function(a,b){
+        var r={accepteret:0,modtaget:1,afventer:2,afvist:3,lukket:4};
+        if(r[a.status]!==r[b.status]) return r[a.status]-r[b.status];
+        return (a.pris||1e9)-(b.pris||1e9);
+      });
+  }
+
+  function oversigt(){
+    var p=beregn();
+    var liste=tilbudsListe();
+    var modtagne=liste.filter(function(t){return t.status==='modtaget'});
+    var accepteret=liste.filter(function(t){return t.status==='accepteret'})[0];
+    var billigst=modtagne.length?modtagne.reduce(function(a,b){return a.pris<b.pris?a:b}):null;
+
+    var top;
+    if(accepteret){
+      top='<p class="plabel">Sendt videre til <b>'+esc(accepteret.navn)+'</b></p>'
+        +'<p class="pbig">'+tal(accepteret.pris)+'<span class="kr">kr./år</span></p>'
+        +'<p class="pmeta">'+esc(accepteret.navn)+' kontakter jer og sender den endelige aftale. Aftalen indgås direkte mellem jer og selskabet.</p>';
+    } else if(billigst){
+      var dyrest=modtagne.reduce(function(a,b){return a.pris>b.pris?a:b});
+      var spred=dyrest.pris-billigst.pris;
+      top='<p class="plabel">Laveste tilbud til <b>'+esc(A.navn||'jeres virksomhed')+'</b></p>'
+        +'<p class="pbig">'+tal(billigst.pris)+'<span class="kr">kr./år</span></p>'
+        +'<p class="pmeta">fra '+esc(billigst.navn)+' · '+modtagne.length+' af '+liste.length+' har svaret</p>'
+        + (spred>0 ? '<span class="pprog">'+tickS+'Der er '+tal(spred)+' kr. om året mellem højeste og laveste tilbud</span>' : '');
+    } else {
+      top='<p class="plabel">Forespørgsel sendt for <b>'+esc(A.navn||'jeres virksomhed')+'</b></p>'
+        +'<p class="pwait">Venter på svar</p>'
+        +'<span class="pprog">'+tickS+liste.length+' har modtaget jeres forespørgsel</span>'
+        +'<div class="venteboks">'
+        +'<p class="vtitel">I behøver ikke blive på siden</p>'
+        +'<p class="vtekst">Inden for <b>1 hverdag</b> sender vi jer en mail, så snart vi har samlet <b>mindst 3 tilbud</b>. '
+        +'Mailen indeholder et link, der åbner jeres overblik, så I kan sammenligne priserne og vælge.</p>'
+        +'</div>'
+        +'<div class="phandling"><button class="btn quiet" id="simuler">Simuler svar (prototype)</button>'
+        +'<button class="btn quiet" id="aabensvar">Åbn selskabets svarside</button></div>';
+    }
+
+    var h='<section class="prishero"><div class="c">'
+      +'<div class="crumbrow"><a class="crumb" href="#" id="tilbageforside2">Start forfra</a></div>'
+      + trinbjaelke(3)
+      + top +'</div></section>'
+      +'<div class="c"><div class="grid"><div><div class="card">'
+      +'<div class="chead"><h2>Jeres tilbud</h2><span class="pill">'+modtagne.length+' modtaget · '
+      + liste.filter(function(t){return t.status==='afventer'}).length +' afventer</span></div>'
+      +'<div class="tilbudliste">';
+
+    liste.forEach(function(t){
+      var billigstMark = billigst && t.key===billigst.key && !accepteret;
+      h+='<div class="tkort'+(t.status==='accepteret'?' valgt':'')+'">'
+        +'<div class="trow"><div class="tnavn">'+esc(t.navn)
+        + (billigstMark?'<span class="tbedst">Laveste pris</span>':'')
+        + (t.status==='accepteret'?'<span class="tbedst">Sendt videre</span>':'')+'</div>';
+      if(t.status==='modtaget'||t.status==='accepteret'){
+        var diff = billigst ? t.pris-billigst.pris : 0;
+        h+='<div class="tpris">'+kr(t.pris)
+          + (diff>0 ? '<span class="tdiff">+'+tal(diff)+' kr.</span>' : '<span>pr. år</span>')
+          +'</div>';
+      } else if(t.status==='afventer'){
+        h+='<div class="tstatus">Afventer svar</div>';
+      } else if(t.status==='afvist'){
+        h+='<div class="tstatus">Giver ikke tilbud</div>';
+      } else {
+        h+='<div class="tstatus">Lukket</div>';
+      }
+      h+='</div>';
+      if(t.status==='modtaget'){
+        var linjer=[];
+        if(t.bindingsperiode) linjer.push(t.bindingsperiode);
+        if(t.aesMed===false) linjer.push('AES-bidrag ikke med i prisen');
+        if(t.gyldigTil) linjer.push('gælder til '+t.gyldigTil);
+        if(t.svartid) linjer.push('svar '+t.svartid);
+        h+='<div class="tmeta">'+esc(linjer.join(' · '))+'</div>'
+          + (t.bemaerkning?'<div class="tbem">'+tickS+'<span>'+esc(t.bemaerkning)+'</span></div>':'')
+          +'<div class="tact"><button class="btn small" data-koeb="'+t.key+'">Gå videre med '+esc(t.navn)+'</button></div>';
+      }
+      if(t.status==='afvist'&&t.grund) h+='<div class="tmeta">'+esc(t.grund)+'</div>';
+      if(t.status==='accepteret') h+='<div class="tmeta">Sendt videre · selskabet udarbejder den endelige aftale</div>';
+      h+='</div>';
+    });
+
+    h+='</div></div></div>'
+      +'<div><div class="side"><div class="panel">'
+      +'<h2>Det de har fået</h2>'
+      +'<div class="breakdown" style="margin-top:18px">'
+      +'<div class="ln"><b>Virksomhed</b><span>'+esc(A.navn||'')+'</span></div>'
+      +'<div class="ln"><b>CVR</b><span class="code">'+esc(A.cvr||'')+'</span></div>'
+      +'<div class="ln"><b>Branchekode</b><span class="code">'+esc(A.kode||'')+'</span></div>'
+      +'<div class="ln"><b>Årsværk</b><span>'+dec(p?p.ans:0)+'</span></div>'
+      +'<div class="ln"><b>Startdato</b><span>'+esc(A.start||'')+'</span></div>'
+      + (p?'<div class="ln tot"><b>Vores estimat</b><span>'+kr(p.total)+'</span></div>':'')
+      +'</div>'
+      + (A.linkSendt?'<div class="gemt">'+tickS+'<span><b>Gemt.</b> Vi har sendt et link til '+esc(A.kontaktMail||'jeres mail')+', så I kan vende tilbage hertil og se svarene.</span></div>':'')
+      +'<p class="note">Estimatet er vores eget og ikke et tilbud. Priserne er selskabernes egne. Forsikringsaftalen indgås direkte mellem jer og det selskab, I vælger — vi er ikke part i aftalen.</p>'
+      +'</div></div></div></div></div>';
+
+    app.innerHTML=h;
+    document.getElementById('tilbageforside2').onclick=function(e){
+      e.preventDefault();
+      A={aarsvaerk:'',bekraeftet:false,branche:''};
+      VALGT={}; TILBUD={}; forside(); window.scrollTo(0,0);
+    };
+    var sim=document.getElementById('simuler'); if(sim) sim.onclick=simulerSvar;
+    var aas=document.getElementById('aabensvar');
+    if(aas) aas.onclick=function(){
+      var k=Object.keys(TILBUD).filter(function(x){return TILBUD[x].status==='afventer'})[0];
+      if(k){svarside(k);window.scrollTo(0,0)}
+    };
+    app.querySelectorAll('[data-koeb]').forEach(function(b){
+      b.onclick=function(){accept(b.getAttribute('data-koeb'))};
+    });
+  }
+
+  /* ---------- accept ---------- */
+  function accept(key){
+    var t=TILBUD[key]; if(!t) return;
+    M.sidstFokus=document.activeElement;
+    document.body.classList.add('locked');
+    var o=document.createElement('div');
+    o.className='ovl'; o.id='ovl';
+    o.innerHTML='<div class="modal" role="dialog" aria-modal="true" aria-labelledby="ah">'
+      +'<div class="mtop"><span class="pill">Videre til selskabet</span>'
+      +'<button class="xbtn" id="x" aria-label="Luk"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>'
+      +'<h3 id="ah">Gå videre med '+esc(t.navn)+'</h3>'
+      +'<p class="mlead">Vi sender jeres oplysninger og valg til '+esc(t.navn)+'. Selskabet udarbejder den endelige police og sender den til jer. Aftalen indgås mellem jer og selskabet, og I skriver under hos dem.</p>'
+      +'<div class="bigval"><span class="num">'+kr(t.pris)+'</span><span class="cap">pr. år · '+esc(t.bindingsperiode||'')+'</span></div>'
+      +'<div class="hbox"><div class="hin" style="padding:14px 16px"><p style="margin:0"><b>Hvad sker der nu:</b> '+esc(t.navn)+' kontakter jer med det endelige tilbud og betingelserne. I er ikke bundet af noget, før I har skrevet under hos selskabet.</p></div></div>'
+      +'<label class="consent"><input type="checkbox" id="a1"><span>Jeg ønsker, at '+esc(t.navn)+' udarbejder det endelige tilbud til virksomheden.</span></label>'
+      +'<label class="consent"><input type="checkbox" id="a2"><span>Jeg giver samtykke til, at mine oplysninger sendes til '+esc(t.navn)+', som må kontakte mig om tilbuddet.</span></label>'
+      +'<p class="err" id="aerr"></p>'
+      +'<div class="mact"><button class="btn quiet" id="fortryd">Fortryd</button><button class="btn" id="bekraeft">Send til selskabet</button></div>'
+      +'</div>';
+    document.body.appendChild(o);
+    o.addEventListener('mousedown',function(e){if(e.target===o)lukAccept()});
+    document.getElementById('x').onclick=lukAccept;
+    document.getElementById('fortryd').onclick=lukAccept;
+    document.getElementById('a1').focus({preventScroll:true});
+    document.getElementById('bekraeft').onclick=function(){
+      var e=document.getElementById('aerr');
+      if(!document.getElementById('a1').checked||!document.getElementById('a2').checked){
+        e.textContent='Sæt begge flueben for at sende videre til selskabet.';return;
+      }
+      Object.keys(TILBUD).forEach(function(k){
+        if(k===key) TILBUD[k].status='accepteret';
+        else if(TILBUD[k].status!=='afvist') TILBUD[k].status='lukket';
+      });
+      lukAccept(); oversigt(); window.scrollTo(0,0);
+    };
+  }
+  function lukAccept(){
+    var o=document.getElementById('ovl'); if(o) o.remove();
+    document.body.classList.remove('locked');
+  }
+
+  /* ---------- undersider og routing ---------- */
+  function underside(k){
+    var s=sideData(k); if(!s) return rute();
+    var sek={daekning:function(){return secLovpligt()+secDaekning()},
+             erstatning:secErstatning, priser:secPriser, billig:secBillig,
+             betingelser:secBetingelser, spoergsmaal:secFaq}[k];
+    app.innerHTML='<section class="hero"><div class="c">'
+      +'<p class="eyebrow"><a class="crumb" href="#">Forsiden</a></p>'
+      +'<h1>'+esc(s[2])+'</h1><p class="lead">'+esc(s[3])+'</p></div></section>'
+      + sek()
+      +'<section class="cta-slut"><div class="c"><div><h2>Se hvad det koster jer</h2>'
+      +'<p>Indtast CVR-nummeret, bekræft to ting, og se prisen med det samme.</p></div>'
+      +'<a class="btn" href="#">Beregn prisen</a></div></section>';
+    window.scrollTo(0,0);
+  }
+
+  function menu(){
+    document.getElementById('fnav').innerHTML='<a href="#" style="color:inherit">Beregn pris</a><br>'
+      + SIDER.map(function(s){return '<a href="#'+s[0]+'" style="color:inherit">'+esc(s[1])+'</a>'}).join('<br>');
+  }
+
+  function rute(){
+    var k=(location.hash||'').replace('#','');
+    menu();
+    if(k&&sideData(k)) underside(k);
+    else if(A.navn) beregner();
+    else forside();
+  }
+
+  window.addEventListener('hashchange',rute);
+  rute();
+})();
+</script>
+</body>
+</html>
