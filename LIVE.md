@@ -80,21 +80,19 @@ Så rører du ikke mail-opsætningen.
 
 ---
 
-## E. Slå caching til igen
+## E. Caching · klaret
 
-21. Åbn `app/api/cvr/route.ts`.
-22. Find linjen med `'Cache-Control': 'no-store'`.
-23. Ret den til:
+`app/api/cvr/route.ts` cacher nu svaret i en time på Vercels kant og
+serverer det i op til et døgn, mens et nyt hentes i baggrunden.
+`force-dynamic` og `revalidate = 0` er fjernet.
 
-```
-'Cache-Control': 's-maxage=3600, stale-while-revalidate=86400'
-```
+Det sparer CVR-kvoten, når flere slår det samme firma op — og når
+Google begynder at crawle.
 
-24. Fjern også `export const dynamic = 'force-dynamic';` og `export const revalidate = 0;`
-    øverst i samme fil.
-25. Commit og push. Vercel bygger selv igen.
-
-Det sparer jer for opslag af CVR-kvoten, når flere slår det samme firma op.
+**Hvis du senere retter felterne i CVR-svaret:** sæt midlertidigt
+`'Cache-Control': 'no-store'` tilbage og slet mappen `.next`. Ellers
+får du den gamle udgave serveret og tror, rettelsen ikke virkede.
+Det kostede os en aften første gang.
 
 ---
 
