@@ -22,6 +22,9 @@ export const metadata: Metadata = {
       'Indtast CVR-nummer og få et vejledende prisestimat på arbejdsskadeforsikring. ' +
       'Gratis og uforpligtende.',
   },
+  // Uden den her viser X og flere mailklienter kun et lille miniaturebillede.
+  // LinkedIn og Facebook bruger Open Graph-billedet ovenfor af sig selv.
+  twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
 };
 

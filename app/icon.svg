@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img"
+     aria-label="beregnarbejdsskade.dk">
+  <!--
+    Tre faldende søjler: prisen ned. Rent geometrisk, så mærket
+    også kan læses ved 16 pixel i et faneblad.
+  -->
+  <rect width="64" height="64" rx="15" fill="#1F5F52"/>
+  <rect x="14"   y="23" width="9" height="24" rx="4.5" fill="#FFFFFF" opacity=".55"/>
+  <rect x="27.5" y="29" width="9" height="18" rx="4.5" fill="#FFFFFF" opacity=".78"/>
+  <rect x="41"   y="34" width="9" height="13" rx="4.5" fill="#FFFFFF"/>
+</svg>
