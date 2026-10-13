@@ -141,6 +141,29 @@ Derfor står den slået fra.
 
 ---
 
+## G3. To ting der har kostet os tid
+
+**Pak altid filer ud med Terminal, aldrig ved at trække mapper i Finder.**
+Trækker man en mappe ved navn `app` oven på en mappe ved navn `app`,
+*erstatter* macOS hele mappen i stedet for at flette. Den 11. oktober
+forsvandt elleve filer på den måde — hele login, selskabernes svarsider og
+databaseforbindelsen — uden at nogen opdagede det. Den rigtige kommando:
+
+```
+cd /sti/til/beregnarbejdsskade
+unzip -o ~/Downloads/filen.zip
+```
+
+`-o` overskriver de filer, der er i zip-filen, og rører ikke resten.
+
+**Tjek altid Vercel efter et push.**
+Fejler en bygning, bliver den forrige udgave ved med at svare. Siden ser
+altså helt normal ud udefra, mens rettelserne aldrig når ud. Tre bygninger
+nåede at fejle i træk, før det blev opdaget. Slå mailnotifikation til under
+**Settings → My Notifications**, og kig på **Deployments** efter hvert push.
+
+---
+
 ## H. Når siden kører
 
 - Vercel viser besøgstal under **Analytics**

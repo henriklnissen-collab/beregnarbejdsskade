@@ -186,7 +186,7 @@ function Beregner({
                 {tal(estimat.hoej)} kr. · {kroner(estimat.maanedligt)} om måneden
               </p>
               <span className="pprog">
-                Hertil AES-bidrag {tal(estimat.aes)} kr. om året, som betales særskilt
+                Svarer til {tal(estimat.prAarsvaerk)} kr. pr. årsværk
               </span>
               <div className="phandling">
                 <button className="btn stor" onClick={onVidere}>
@@ -259,22 +259,18 @@ function Beregner({
                     <b>Spænd i markedet</b>
                     <span>{kroner(estimat.lav)} – {kroner(estimat.hoej)}</span>
                   </div>
-                  <div className="ln">
-                    <b>AES-bidrag</b>
-                    <span>{kroner(estimat.aes)}</span>
-                  </div>
                   <div className="ln tot">
-                    <b>Samlet lovpligtig udgift</b>
-                    <span>{kroner(estimat.total)}</span>
+                    <b>Pris pr. årsværk</b>
+                    <span>{kroner(estimat.prAarsvaerk)}</span>
                   </div>
                 </div>
 
                 <p className="note" style={{ marginTop: 20 }}>
                   Præmien indeholder lovpligtigt arbejdsmiljøbidrag på 2 % og 30 kr.
-                  pr. årsværk til Garantifonden. <b>AES-bidraget for erhvervssygdomme
-                  betales særskilt</b> via Samlet Betaling og går ikke til
-                  forsikringsselskabet.
-                  {estimat.aesUsikker && ' AES-satsen afhænger af den præcise branchekode.'}
+                  pr. årsværk til Garantifonden. Bidraget til Arbejdsmarkedets
+                  Erhvervssikring for erhvervssygdomme kommer oveni og opkræves
+                  særskilt via Samlet Betaling — det går ikke til forsikringsselskabet
+                  og er det samme, uanset hvilket selskab I vælger.
                 </p>
 
                 <p className="note">

@@ -243,6 +243,8 @@ export type Estimat = {
   total: number;
   /** middelpræmien pr. måned */
   maanedligt: number;
+  /** middelpræmien delt med antal årsværk — prisen pr. mand */
+  prAarsvaerk: number;
 
   /** sandt når minimumspræmien løftede den laveste pris */
   minimumRamt: boolean;
@@ -309,6 +311,7 @@ export function beregn(
 
     total: middel.pris + aes,
     maanedligt: Math.round(middel.pris / 12),
+    prAarsvaerk: Math.round(middel.pris / av),
 
     minimumRamt: lav.minRamt,
   };
