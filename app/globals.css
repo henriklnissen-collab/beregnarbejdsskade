@@ -320,3 +320,36 @@ label.f{display:block;font-weight:700;font-size:16px;color:var(--ink);margin:0 0
 .bund li{margin-bottom:9px}
 .bundbund{border-top:1px solid var(--line);font-size:14px}
 .bundbund .c{display:block;padding:18px 24px}
+
+/* ── brancher og årsværk ── */
+.bgrid{display:grid;gap:10px;margin-top:22px}
+.bgrp{display:flex;gap:10px;align-items:center}
+.bgrp select{flex:1;min-width:0;padding:13px 14px;font-size:16px}
+.bfelt{display:flex;align-items:center;gap:2px;flex:none}
+.bfelt input{width:84px;text-align:center;font-size:17px;font-weight:700;
+  color:var(--ink);padding:13px 8px;font-variant-numeric:tabular-nums}
+.brest{flex:none;width:84px;text-align:center;padding:9px 4px;border-radius:11px;
+  background:var(--soft);border:1.5px solid var(--soft-line);margin-right:30px}
+.brest span{display:block;font-size:19px;font-weight:800;color:var(--ink);
+  line-height:1.1;font-variant-numeric:tabular-nums}
+.brest small{display:block;font-size:11px;color:var(--muted);margin-top:1px}
+.brest.over{background:transparent;border-color:var(--warn)}
+.brest.over span{color:var(--warn)}
+@media (max-width:460px){
+  .bgrp select{font-size:15px;padding:12px 10px}
+  .bfelt input,.brest{width:70px}
+  .brest{margin-right:26px}
+}
+
+/* fordelingen vist på beregnersiden */
+.bhead{display:flex;align-items:baseline;justify-content:space-between;
+  gap:14px;margin:26px 0 10px}
+.bhead b{color:var(--ink);font-size:16px}
+.bliste{display:grid;gap:8px}
+.brow{display:flex;justify-content:space-between;gap:14px;align-items:baseline;
+  background:var(--bg);border:1px solid var(--line);border-radius:11px;
+  padding:13px 16px;font-size:16px}
+.brow .bnavn{color:var(--ink);font-weight:600}
+.brow .bav{font-weight:700;color:var(--body);font-variant-numeric:tabular-nums;
+  white-space:nowrap}
+.brow .bav::after{content:" årsværk";font-weight:500;color:var(--muted);font-size:14px}

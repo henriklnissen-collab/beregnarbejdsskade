@@ -71,6 +71,8 @@ export type SagTilMail = {
   branchekode: string | null;
   branchetekst: string | null;
   aarsvaerk: number;
+  /** fordelingen på brancher, hvis virksomheden har folk i flere slags arbejde */
+  brancher?: { navn: string; klasse: string; aarsvaerk: number }[];
   startdato: string | null;
   kontaktNavn: string;
 };
@@ -89,6 +91,13 @@ export function brevTilSelskab(
     ['Branchekode', sag.branchekode || '—'],
     ['Branche', sag.branchetekst || '—'],
     ['Årsværk', dec(sag.aarsvaerk)],
+    // Har virksomheden folk i flere slags arbejde, er fordelingen det
+    // vigtigste, selskabet får — uden den prissætter de på den forkerte
+    // risikogruppe for en del af medarbejderne.
+    ...((sag.brancher?.length ?? 0) > 1
+      ? [['Fordeling oplyst af kunden',
+          sag.brancher!.map((b) => `${b.navn}: ${dec(b.aarsvaerk)}`).join(' · ')]]
+      : []),
     ['Ønsket startdato', sag.startdato || 'snarest muligt'],
   ];
 

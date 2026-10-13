@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db, nytToken } from '@/lib/db';
-import { beregn, type Prisgruppe } from '@/lib/priser';
+import { beregnFlere, SATSER, type Prisgruppe, type Linje } from '@/lib/priser';
 import { sendMail, brevTilSelskab, brevTilKunde, type SagTilMail } from '@/lib/mail';
 
 /**
@@ -20,6 +20,7 @@ type Indgang = {
   branchekode?: string;
   branchetekst?: string;
   prisgruppe?: string;
+  linjer?: { gruppe?: string; aarsvaerk?: number }[];
   aarsvaerk?: number;
   aarsvaerkCvr?: number | null;
   aarsvaerkPeriode?: string | null;
@@ -93,8 +94,25 @@ export async function POST(req: Request) {
       );
     }
 
-    const gruppe = (k.prisgruppe ?? 'andet') as Prisgruppe;
-    const estimat = beregn(gruppe, aarsvaerk);
+    // Browseren sender fordelingen på brancher. Vi stoler ikke på den:
+    // ukendte grupper falder tilbage på 'andet', og tal uden værdi ryger ud.
+    // Er der ingen brugbar fordeling, lægges alle årsværk i én gruppe.
+    const indkomne: Linje[] = (Array.isArray(k.linjer) ? k.linjer : [])
+      .map((l) => ({
+        gruppe: (l?.gruppe && l.gruppe in SATSER ? l.gruppe : 'andet') as Prisgruppe,
+        aarsvaerk: Number(l?.aarsvaerk),
+      }))
+      .filter((l) => Number.isFinite(l.aarsvaerk) && l.aarsvaerk > 0);
+
+    const linjer: Linje[] = indkomne.length
+      ? indkomne
+      : [{
+          gruppe: (k.prisgruppe && k.prisgruppe in SATSER
+            ? k.prisgruppe : 'andet') as Prisgruppe,
+          aarsvaerk,
+        }];
+
+    const estimat = beregnFlere(linjer);
     const nu = new Date().toISOString();
 
     // Hvem der sendte, gemmes til dokumentation af samtykket.
@@ -110,8 +128,12 @@ export async function POST(req: Request) {
         firmanavn: String(k.firmanavn ?? '').trim() || `Virksomhed ${cvr}`,
         branchekode: k.branchekode ?? null,
         branchetekst: k.branchetekst ?? null,
-        prisgruppe: gruppe,
-        aarsvaerk,
+        prisgruppe: estimat.gruppe,
+        aarsvaerk: estimat.aarsvaerk,
+        brancher: estimat.linjer.map((l) => ({
+          gruppe: l.gruppe, navn: l.gruppenavn,
+          klasse: l.klasse, aarsvaerk: l.aarsvaerk,
+        })),
         aarsvaerk_cvr: k.aarsvaerkCvr ?? null,
         aarsvaerk_periode: k.aarsvaerkPeriode ?? null,
         startdato: k.startdato || null,
@@ -148,7 +170,10 @@ export async function POST(req: Request) {
       cvr,
       branchekode: k.branchekode ?? null,
       branchetekst: k.branchetekst ?? null,
-      aarsvaerk,
+      aarsvaerk: estimat.aarsvaerk,
+      brancher: estimat.linjer.map((l) => ({
+        navn: l.gruppenavn, klasse: l.klasse, aarsvaerk: l.aarsvaerk,
+      })),
       startdato: k.startdato || null,
       kontaktNavn: navn,
     };

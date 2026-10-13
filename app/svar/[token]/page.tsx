@@ -88,6 +88,18 @@ export default async function SvarSide({
                 <div className="ln"><b>Branchekode</b><span className="code">{sag.branchekode || '—'}</span></div>
                 <div className="ln"><b>Branche</b><span>{sag.branchetekst || '—'}</span></div>
                 <div className="ln"><b>Årsværk</b><span>{dec(Number(sag.aarsvaerk))}</span></div>
+                {Array.isArray(sag.brancher) && sag.brancher.length > 1 && (
+                  <div className="ln">
+                    <b>Fordeling</b>
+                    <span>
+                      {sag.brancher.map((b: any, i: number) => (
+                        <span key={i} style={{ display: 'block' }}>
+                          {b.navn}: {dec(Number(b.aarsvaerk))}
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                )}
                 <div className="ln"><b>Ønsket startdato</b><span>{sag.startdato || 'snarest'}</span></div>
                 <div className="ln"><b>Samtykke til skadesoplysninger</b><span>Ja</span></div>
               </div>

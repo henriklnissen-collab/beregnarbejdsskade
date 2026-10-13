@@ -187,6 +187,18 @@ export default async function MineTilbud() {
                 <div className="ln"><b>CVR</b><span className="code">{sag.cvr}</span></div>
                 <div className="ln"><b>Branchekode</b><span className="code">{sag.branchekode || '—'}</span></div>
                 <div className="ln"><b>Årsværk</b><span>{dec(Number(sag.aarsvaerk))}</span></div>
+                {Array.isArray(sag.brancher) && sag.brancher.length > 1 && (
+                  <div className="ln">
+                    <b>Fordeling</b>
+                    <span>
+                      {sag.brancher.map((b: any, i: number) => (
+                        <span key={i} style={{ display: 'block' }}>
+                          {b.navn}: {dec(Number(b.aarsvaerk))}
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                )}
                 {sag.estimat_total && (
                   <div className="ln tot"><b>Vores estimat</b><span>{kr(sag.estimat_total)}</span></div>
                 )}

@@ -1,7 +1,10 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { beregn, kroner, SATSER, type Prisgruppe, type Estimat } from '@/lib/priser';
+import {
+  beregnFlere, kroner, SATSER,
+  type Prisgruppe, type Estimat, type Linje,
+} from '@/lib/priser';
 
 type Firma = {
   cvr: string;
@@ -37,26 +40,28 @@ const tal = (n: number) => new Intl.NumberFormat('da-DK').format(Math.round(n));
 export default function Side() {
   const [firma, setFirma] = useState<Firma | null>(null);
   const [aarsvaerk, setAarsvaerk] = useState<number | null>(null);
-  const [gruppe, setGruppe] = useState<Prisgruppe | null>(null);
+  const [linjer, setLinjer] = useState<Linje[] | null>(null);
   const [aarsvaerkPopup, setAarsvaerkPopup] = useState(false);
+  const [branchePopup, setBranchePopup] = useState(false);
   const [forespoergsel, setForespoergsel] = useState(false);
   const [sendt, setSendt] = useState<{ antal: number } | null>(null);
 
   function forfra() {
-    setFirma(null); setAarsvaerk(null); setGruppe(null);
+    setFirma(null); setAarsvaerk(null); setLinjer(null);
+    setAarsvaerkPopup(false); setBranchePopup(false);
     setForespoergsel(false); setSendt(null);
   }
 
   if (!firma) {
     return (
       <Forside onFundet={(f) => {
-        setFirma(f); setGruppe(f.prisgruppe);
+        setFirma(f); setLinjer(null);
         setAarsvaerk(null); setAarsvaerkPopup(true);
       }} />
     );
   }
 
-  const estimat: Estimat | null = gruppe && aarsvaerk ? beregn(gruppe, aarsvaerk) : null;
+  const estimat: Estimat | null = linjer?.length ? beregnFlere(linjer) : null;
 
   if (sendt) {
     return <Kvittering firma={firma} antal={sendt.antal} onForfra={forfra} />;
@@ -65,8 +70,8 @@ export default function Side() {
   return (
     <>
       <Beregner
-        firma={firma} gruppe={gruppe!} aarsvaerk={aarsvaerk} estimat={estimat}
-        onGruppe={setGruppe}
+        firma={firma} aarsvaerk={aarsvaerk} estimat={estimat}
+        onBrancher={() => setBranchePopup(true)}
         onRet={() => setAarsvaerkPopup(true)}
         onVidere={() => setForespoergsel(true)}
         onForfra={forfra}
@@ -74,13 +79,40 @@ export default function Side() {
       {aarsvaerkPopup && (
         <AarsvaerkPopup
           firma={firma} start={aarsvaerk ?? firma.aarsvaerk}
-          onGem={(n) => { setAarsvaerk(n); setAarsvaerkPopup(false); }}
+          onGem={(n) => {
+            setAarsvaerk(n);
+            setAarsvaerkPopup(false);
+            // Første gang lægges alle årsværk på CVR-branchen, og så
+            // spørger vi, om den fordeling passer.
+            if (!linjer) {
+              setLinjer([{ gruppe: firma.prisgruppe, aarsvaerk: n }]);
+              setBranchePopup(true);
+              return;
+            }
+            // Retter kunden tallet bagefter, lægges forskellen på den
+            // største linje, så summen bliver ved med at passe.
+            setLinjer((gl) => {
+              if (!gl) return gl;
+              const sum = gl.reduce((a, l) => a + l.aarsvaerk, 0);
+              const i = gl.reduce((b, l, j, a) => (l.aarsvaerk > a[b].aarsvaerk ? j : b), 0);
+              return gl.map((l, j) =>
+                j === i ? { ...l, aarsvaerk: Math.max(0.1, l.aarsvaerk + (n - sum)) } : l);
+            });
+          }}
           onLuk={() => setAarsvaerkPopup(false)}
+        />
+      )}
+
+      {branchePopup && linjer && aarsvaerk !== null && (
+        <BranchePopup
+          firma={firma} start={linjer} ialt={aarsvaerk}
+          onGem={(nye) => { setLinjer(nye); setBranchePopup(false); }}
+          onLuk={() => setBranchePopup(false)}
         />
       )}
       {forespoergsel && estimat && (
         <ForespoergselPopup
-          firma={firma} gruppe={gruppe!} aarsvaerk={aarsvaerk!}
+          firma={firma} linjer={linjer!} aarsvaerk={aarsvaerk!}
           onLuk={() => setForespoergsel(false)}
           onSendt={(antal) => { setForespoergsel(false); setSendt({ antal }); }}
         />
@@ -160,10 +192,10 @@ function Forside({ onFundet }: { onFundet: (f: Firma) => void }) {
 /* ───────────────────────── beregner ───────────────────────── */
 
 function Beregner({
-  firma, gruppe, aarsvaerk, estimat, onGruppe, onRet, onVidere, onForfra,
+  firma, aarsvaerk, estimat, onBrancher, onRet, onVidere, onForfra,
 }: {
-  firma: Firma; gruppe: Prisgruppe; aarsvaerk: number | null; estimat: Estimat | null;
-  onGruppe: (g: Prisgruppe) => void; onRet: () => void;
+  firma: Firma; aarsvaerk: number | null; estimat: Estimat | null;
+  onBrancher: () => void; onRet: () => void;
   onVidere: () => void; onForfra: () => void;
 }) {
   return (
@@ -231,18 +263,26 @@ function Beregner({
               </div>
             </div>
 
-            <label className="f" htmlFor="br" style={{ marginTop: 24 }}>
-              Prisgruppe ud fra branchekoden
-            </label>
-            <select id="br" value={gruppe} onChange={(e) => onGruppe(e.target.value as Prisgruppe)}>
-              {Object.entries(SATSER).map(([n, s]) => (
-                <option key={n} value={n}>{s.navn}</option>
-              ))}
-            </select>
-            <p className="help">
-              Udfyldt ud fra branchekode {firma.branchekode || '—'}.
-              Ret den, hvis arbejdet i praksis ser anderledes ud end koden.
-            </p>
+            {estimat && (
+              <>
+                <div className="bhead">
+                  <b>Brancher og årsværk</b>
+                  <button className="linkbtn" onClick={onBrancher}>Ret fordelingen</button>
+                </div>
+                <div className="bliste">
+                  {estimat.linjer.map((l, i) => (
+                    <div className="brow" key={l.gruppe + i}>
+                      <span className="bnavn">{l.gruppenavn}</span>
+                      <span className="bav">{dec(l.aarsvaerk)}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="help">
+                  Udfyldt ud fra branchekode {firma.branchekode || '—'}. Har I folk i
+                  flere slags arbejde, giver fordelingen en mere rigtig pris.
+                </p>
+              </>
+            )}
 
             {estimat && (
               <>
@@ -355,12 +395,142 @@ function AarsvaerkPopup({
   );
 }
 
+/* ─────────────── popup: brancher og årsværk ─────────────── */
+
+/**
+ * Efter at årsværkene er bekræftet spørger vi, om branchen passer.
+ *
+ * Den første linje er virksomhedens hovedbranche, og den rummer altid
+ * resten. Tilføjer kunden en linje og skriver fem årsværk der, trækkes
+ * de fem fra hovedbranchen af sig selv. Så kan summen aldrig komme til
+ * at passe dårligt, og der er kun ét felt at udfylde pr. branche.
+ */
+function BranchePopup({
+  firma, start, ialt, onGem, onLuk,
+}: {
+  firma: Firma; start: Linje[]; ialt: number;
+  onGem: (linjer: Linje[]) => void; onLuk: () => void;
+}) {
+  type Raekke = { gruppe: Prisgruppe; tekst: string };
+
+  const [raekker, setRaekker] = useState<Raekke[]>(() =>
+    start.length
+      ? start.map((l, i) => ({
+          gruppe: l.gruppe,
+          tekst: i === 0 ? '' : String(l.aarsvaerk).replace('.', ','),
+        }))
+      : [{ gruppe: firma.prisgruppe, tekst: '' }]);
+
+  useLaast(onLuk);
+
+  const til = (t: string) => {
+    const n = parseFloat(t.replace(',', '.').replace(/[^\d.]/g, ''));
+    return Number.isFinite(n) && n > 0 ? n : 0;
+  };
+
+  const ekstra = raekker.slice(1).reduce((a, r) => a + til(r.tekst), 0);
+  const rest = Math.round((ialt - ekstra) * 10) / 10;
+  const forMeget = rest <= 0;
+
+  const brugte = new Set(raekker.map((r) => r.gruppe));
+  const ledige = (Object.keys(SATSER) as Prisgruppe[]).filter((g) => !brugte.has(g));
+
+  function tilfoej() {
+    if (!ledige.length) return;
+    setRaekker([...raekker, { gruppe: ledige[0], tekst: '' }]);
+  }
+
+  function fjern(i: number) {
+    setRaekker(raekker.filter((_, j) => j !== i));
+  }
+
+  function saet(i: number, aendring: Partial<Raekke>) {
+    setRaekker(raekker.map((r, j) => (j === i ? { ...r, ...aendring } : r)));
+  }
+
+  function gem() {
+    if (forMeget) return;
+    const linjer: Linje[] = [
+      { gruppe: raekker[0].gruppe, aarsvaerk: rest },
+      ...raekker.slice(1)
+        .map((r) => ({ gruppe: r.gruppe, aarsvaerk: til(r.tekst) }))
+        .filter((l) => l.aarsvaerk > 0),
+    ];
+    onGem(linjer);
+  }
+
+  return (
+    <Overlay onLuk={onLuk}>
+      <div className="mtop">
+        <span className="pill">Branche</span>
+        <button className="xbtn" onClick={onLuk} aria-label="Luk"><Kryds /></button>
+      </div>
+
+      <h3 className="midt">Passer branchen?</h3>
+      <p className="mlead midt">
+        Vi har hentet <b>{SATSER[firma.prisgruppe]?.navn ?? 'Andet'}</b> ud fra
+        branchekode {firma.branchekode || '—'}. Har I folk i flere slags arbejde,
+        bliver prisen rigtigere, hvis I deler årsværkene op.
+      </p>
+
+      <div className="bgrid">
+        {raekker.map((r, i) => (
+          <div className="bgrp" key={i}>
+            <select
+              aria-label={i === 0 ? 'Hovedbranche' : `Branche ${i + 1}`}
+              value={r.gruppe}
+              onChange={(e) => saet(i, { gruppe: e.target.value as Prisgruppe })}
+            >
+              {(Object.keys(SATSER) as Prisgruppe[])
+                .filter((g) => g === r.gruppe || !brugte.has(g))
+                .map((g) => <option key={g} value={g}>{SATSER[g].navn}</option>)}
+            </select>
+
+            {i === 0 ? (
+              <div className={`brest${forMeget ? ' over' : ''}`}>
+                <span>{forMeget ? '—' : dec(rest)}</span>
+                <small>årsværk</small>
+              </div>
+            ) : (
+              <div className="bfelt">
+                <input
+                  type="text" inputMode="decimal" aria-label="Antal årsværk"
+                  placeholder="0" value={r.tekst}
+                  onChange={(e) => saet(i, { tekst: e.target.value })}
+                />
+                <button className="xbtn" onClick={() => fjern(i)}
+                        aria-label="Fjern branchen"><Kryds /></button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {ledige.length > 0 && (
+        <button className="btn quiet block" style={{ marginTop: 12 }} onClick={tilfoej}>
+          + Tilføj en branche
+        </button>
+      )}
+
+      <p className="err midt">
+        {forMeget ? `I har bekræftet ${dec(ialt)} årsværk i alt. Skru ned et sted.` : ''}
+      </p>
+
+      <div className="mvalg">
+        <button className="btn stor block" onClick={gem} disabled={forMeget}>
+          {raekker.length === 1 ? 'Ja, det passer' : 'Gem fordelingen'}
+        </button>
+      </div>
+    </Overlay>
+  );
+}
+
 /* ─────────────── popup: forespørgsel i tre trin ─────────────── */
 
 function ForespoergselPopup({
-  firma, gruppe, aarsvaerk, onLuk, onSendt,
+  firma, linjer, aarsvaerk, onLuk, onSendt,
 }: {
-  firma: Firma; gruppe: Prisgruppe; aarsvaerk: number;
+  firma: Firma; linjer: Linje[]; aarsvaerk: number;
   onLuk: () => void; onSendt: (antal: number) => void;
 }) {
   const [trin, setTrin] = useState(0);
@@ -413,7 +583,7 @@ function ForespoergselPopup({
           firmanavn: firma.firmanavn,
           branchekode: firma.branchekode,
           branchetekst: firma.branchetekst,
-          prisgruppe: gruppe,
+          linjer,
           aarsvaerk,
           aarsvaerkCvr: firma.aarsvaerk,
           aarsvaerkPeriode: firma.periode,

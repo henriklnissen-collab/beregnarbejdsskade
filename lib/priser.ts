@@ -207,7 +207,6 @@ export function gruppeFraBranchekode(kode: string): Prisgruppe {
 
   return 'andet';
 }
-
 /* ──────────────────────────── beregningen ──────────────────────────── */
 
 export type BeregnValg = {
@@ -221,12 +220,29 @@ export type BeregnValg = {
   tillaeg2027?: number;
 };
 
+/** En branche og de årsværk, der hører til den. */
+export type Linje = { gruppe: Prisgruppe; aarsvaerk: number };
+
+export type EstimatLinje = {
+  gruppe: Prisgruppe;
+  gruppenavn: string;
+  klasse: Risikoklasse;
+  aarsvaerk: number;
+};
+
 export type Estimat = {
+  /** den linje, der fylder mest — bruges hvor der kun er plads til én */
   gruppe: Prisgruppe;
   gruppenavn: string;
   klasse: Risikoklasse;
   klassenavn: string;
-  /** årsværk rundet op til nærmeste halve */
+
+  /** alle linjer, i den rækkefølge kunden har angivet dem */
+  linjer: EstimatLinje[];
+  /** sandt når virksomheden er fordelt på mere end én branche */
+  blandet: boolean;
+
+  /** samlede årsværk, hver linje rundet op til nærmeste halve */
   aarsvaerk: number;
 
   /** årspræmie inklusive arbejdsmiljøbidrag og Garantifonden */
@@ -236,7 +252,7 @@ export type Estimat = {
 
   /** AES-bidrag pr. år. Betales særskilt via Samlet Betaling. */
   aes: number;
-  /** AES-gruppen afhænger af den præcise branchekode */
+  /** mindst én af brancherne har en AES-gruppe, der afhænger af koden */
   aesUsikker: boolean;
 
   /** samlet lovpligtig udgift: middelpræmie + AES */
@@ -255,10 +271,32 @@ export function timerTilAarsvaerk(ugentligeTimer: number, uger = 45): number {
   return (ugentligeTimer * uger) / TIMER_PR_AARSVAERK;
 }
 
-function enPris(sats: number, av: number, v: BeregnValg): { pris: number; minRamt: boolean } {
-  let p = av * sats;
+/** Op til nærmeste halve årsværk, som selskaberne gør. */
+function rundOp(n: number): number {
+  return Math.max(0.5, Math.ceil(Math.max(0, n) * 2) / 2);
+}
 
-  p *= stoerrelsesfaktor(av);
+type Ren = { gruppe: Prisgruppe; av: number; sats: Sats; k: { lav: number; middel: number; hoej: number } };
+
+/**
+ * Prisen for ét niveau.
+ *
+ * Grundpræmien lægges sammen linje for linje, så en vognmand med et
+ * kontor betaler chaufførpris for chaufførerne og kontorpris for
+ * kontoret. Faktorerne regnes derimod på virksomheden som helhed —
+ * det er den samlede størrelse og den samlede skadehistorik, selskabet
+ * ser på, ikke den enkelte medarbejdergruppe.
+ */
+function enPris(
+  niveau: 'lav' | 'middel' | 'hoej',
+  rene: Ren[],
+  total: number,
+  v: BeregnValg,
+): { pris: number; minRamt: boolean } {
+  let p = 0;
+  for (const l of rene) p += l.av * l.k[niveau];
+
+  p *= stoerrelsesfaktor(total);
   p *= skadefaktor(v.skader ?? 1);
 
   const rabat = Math.min(
@@ -273,48 +311,76 @@ function enPris(sats: number, av: number, v: BeregnValg): { pris: number; minRam
   p *= 1 + (v.tillaeg2027 ?? 0);
 
   // Lovbestemte tillæg. Ingen skadesforsikringsafgift på arbejdsskade.
-  p = p * (1 + ARBEJDSMILJOEBIDRAG) + GARANTIFOND_PR_AARSVAERK * av;
+  p = p * (1 + ARBEJDSMILJOEBIDRAG) + GARANTIFOND_PR_AARSVAERK * total;
 
   return { pris: Math.round(p / 100) * 100, minRamt };
 }
 
-export function beregn(
-  gruppe: Prisgruppe,
-  aarsvaerk: number,
-  valg: BeregnValg = {},
-): Estimat {
-  const s = SATSER[gruppe] ?? SATSER.andet;
-  const k = s.override ?? KLASSER[s.klasse];
+/** Beregning for en virksomhed fordelt på en eller flere brancher. */
+export function beregnFlere(linjer: Linje[], valg: BeregnValg = {}): Estimat {
+  const ind = linjer.length ? linjer : [{ gruppe: 'andet' as Prisgruppe, aarsvaerk: 1 }];
 
-  // Rundes op til nærmeste halve årsværk, som selskaberne gør.
-  const av = Math.max(0.5, Math.ceil(Math.max(0, aarsvaerk) * 2) / 2);
+  const rene: Ren[] = ind.map((l) => {
+    const sats = SATSER[l.gruppe] ?? SATSER.andet;
+    return {
+      gruppe: l.gruppe,
+      av: rundOp(l.aarsvaerk),
+      sats,
+      k: sats.override ?? KLASSER[sats.klasse],
+    };
+  });
 
-  const lav = enPris(k.lav, av, valg);
-  const middel = enPris(k.middel, av, valg);
-  const hoej = enPris(k.hoej, av, valg);
+  const total = rene.reduce((s, l) => s + l.av, 0);
 
-  const aes = Math.round(av * s.aes);
+  const lav = enPris('lav', rene, total, valg);
+  const middel = enPris('middel', rene, total, valg);
+  const hoej = enPris('hoej', rene, total, valg);
+
+  const aes = Math.round(rene.reduce((s, l) => s + l.av * l.sats.aes, 0));
+
+  // Den linje, der fylder mest, repræsenterer virksomheden, hvor der
+  // kun er plads til én branche. Ved dødt løb vinder den tungeste klasse.
+  const primaer = rene.reduce((a, b) =>
+    b.av > a.av || (b.av === a.av && b.sats.klasse > a.sats.klasse) ? b : a);
 
   return {
-    gruppe,
-    gruppenavn: s.navn,
-    klasse: s.klasse,
-    klassenavn: KLASSER[s.klasse].navn,
-    aarsvaerk: av,
+    gruppe: primaer.gruppe,
+    gruppenavn: primaer.sats.navn,
+    klasse: primaer.sats.klasse,
+    klassenavn: KLASSER[primaer.sats.klasse].navn,
+
+    linjer: rene.map((l) => ({
+      gruppe: l.gruppe,
+      gruppenavn: l.sats.navn,
+      klasse: l.sats.klasse,
+      aarsvaerk: l.av,
+    })),
+    blandet: rene.length > 1,
+
+    aarsvaerk: total,
 
     lav: lav.pris,
     middel: middel.pris,
     hoej: hoej.pris,
 
     aes,
-    aesUsikker: Boolean(s.aesUsikker),
+    aesUsikker: rene.some((l) => Boolean(l.sats.aesUsikker)),
 
     total: middel.pris + aes,
     maanedligt: Math.round(middel.pris / 12),
-    prAarsvaerk: Math.round(middel.pris / av),
+    prAarsvaerk: Math.round(middel.pris / total),
 
     minimumRamt: lav.minRamt,
   };
+}
+
+/** Én branche. Samme beregning, kortere kald. */
+export function beregn(
+  gruppe: Prisgruppe,
+  aarsvaerk: number,
+  valg: BeregnValg = {},
+): Estimat {
+  return beregnFlere([{ gruppe, aarsvaerk }], valg);
 }
 
 export function kroner(n: number): string {
