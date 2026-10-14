@@ -536,7 +536,6 @@ function ForespoergselPopup({
   const [trin, setTrin] = useState(0);
   const [modtagere, setModtagere] = useState<Modtager[] | null>(null);
   const [valgt, setValgt] = useState<Set<string>>(new Set());
-  const [vaelgSelv, setVaelgSelv] = useState(false);
 
   const [navn, setNavn] = useState('');
   const [tlf, setTlf] = useState('');
@@ -632,30 +631,13 @@ function ForespoergselPopup({
               <button className="btn quiet block" onClick={onLuk}>Luk</button>
             </div>
           </>
-        ) : !vaelgSelv ? (
-          <>
-            <h3 className="midt">Send til alle selskaber?</h3>
-            <p className="mlead midt">
-              Vi sender jeres oplysninger til {selskaber.length}{' '}
-              {selskaber.length === 1 ? 'forsikringsselskab' : 'forsikringsselskaber'},
-              så I kan sammenligne priserne ét sted.
-            </p>
-            <div className="mvalg">
-              <button className="btn stor block" onClick={() => {
-                setValgt(new Set(selskaber.map((m) => m.id)));
-                setTrin(1);
-              }}>
-                Ja, send til alle
-              </button>
-              <button className="btn quiet block" onClick={() => setVaelgSelv(true)}>
-                Jeg vælger selv
-              </button>
-            </div>
-          </>
         ) : (
           <>
-            <h3>Hvem skal give tilbud?</h3>
-            <p className="mlead">{valgt.size} valgt</p>
+            <h3 className="midt">Hvem skal give tilbud?</h3>
+            <p className="mlead midt">
+              Alle selskaber er valgt på forhånd. Fjern fluebenet ved dem,
+              I ikke ønsker tilbud fra.
+            </p>
             <div className="mscroll">
               <Gruppe titel="Forsikringsselskaber" under="Giver tilbud på deres eget produkt."
                       liste={selskaber} valgt={valgt} onSkift={skift} />
@@ -666,11 +648,11 @@ function ForespoergselPopup({
             </div>
             <p className="err">{fejl}</p>
             <div className="mvalg">
-              <button className="btn stor block" onClick={() => {
+              <button className="btn stor block" disabled={valgt.size === 0} onClick={() => {
                 if (valgt.size === 0) { setFejl('Vælg mindst én modtager.'); return; }
                 setFejl(''); setTrin(1);
               }}>
-                Fortsæt
+                {valgt.size === 1 ? 'Fortsæt med 1 valgt' : `Fortsæt med ${valgt.size} valgte`}
               </button>
             </div>
           </>
