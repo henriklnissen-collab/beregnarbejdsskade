@@ -506,6 +506,13 @@ function BranchePopup({
         ))}
       </div>
 
+      {/* Boblen peger op mod talfeltet og forsvinder, så snart der står noget. */}
+      {raekker.length > 1 && raekker.slice(1).some((r) => !r.tekst.trim()) && (
+        <p className="bhjaelp">
+          Hvor mange fuldtidsansatte arbejder med denne aktivitet?
+        </p>
+      )}
+
       {ledige.length > 0 && (
         <button className="btn quiet block" style={{ marginTop: 12 }} onClick={tilfoej}>
           + Tilføj en branche
